@@ -39,15 +39,7 @@
 
                 <!-- PROFILE -->
                 <ul class="navbar-nav ms-auto d-flex flex-row">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Photo
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
-                        </ul>
-                    </li>
+                    @await Html.PartialAsync("_LoginPartial")
                 </ul>
             </div>
         </nav>
