@@ -13,6 +13,7 @@ namespace ClinicManagement.Profiles
         public UserProfile()
         {
             CreateMap<User, DoctorViewModel>();
+            CreateMap<User, PatientViewModel>();
         }
     }
 }
