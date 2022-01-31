@@ -5,6 +5,11 @@
     {
       "library": "bootstrap@5.0.2",
       "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables.net@1.11.4",
+      "destination": "wwwroot/lib/datatables.net/"
     }
   ]
 }
