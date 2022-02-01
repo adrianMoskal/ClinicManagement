@@ -18,5 +18,7 @@ namespace ClinicManagement.Models
 
         [DisplayName("Role")]
         public string UserRole { get; set; }
+
+        public string UserName { get; set; }
     }
 }

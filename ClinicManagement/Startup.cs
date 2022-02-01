@@ -1,6 +1,5 @@
 using ClinicManagement.Data;
 using ClinicManagement.Entities;
-using ClinicManagement.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,8 +31,6 @@ namespace ClinicManagement
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ClinicDev")));
-
-            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddIdentity<User, Role>(options => options.Stores.MaxLengthForKeys = 128)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

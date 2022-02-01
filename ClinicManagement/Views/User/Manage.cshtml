@@ -41,7 +41,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "dropdown-item" })
-                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#@item.UserId" style="cursor: pointer;">
+                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#@item.UserName" style="cursor: pointer;">
                                 Remove
                             </a>
                         </div>
@@ -50,7 +50,7 @@
             </tr>
 
             <!-- MODALS -->
-            <div class="modal fade" id="@item.UserId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="@item.UserName" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            @Html.ActionLink("Delete", "Delete", new {  id = item.UserId }, new { @class = "btn btn-danger" })
+                            @Html.ActionLink("Delete", "Delete", new {  userId = item.UserId }, new { @class = "btn btn-danger" })
                         </div>
                     </div>
                 </div>

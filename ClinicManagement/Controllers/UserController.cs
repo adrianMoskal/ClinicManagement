@@ -2,7 +2,6 @@
 using ClinicManagement.Data;
 using ClinicManagement.Entities;
 using ClinicManagement.Models;
-using ClinicManagement.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,16 +13,13 @@ namespace ClinicManagement.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserRepository _userRepository;
+        private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
-        private readonly UserManager<User> _userManager;
-        
-        public UserController(UserManager<User> userManager, IMapper mapper, IUserRepository userRepository)
+        public UserController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager;
             _mapper = mapper;
-            _userRepository = userRepository;
         }
 
         public IActionResult Index()
@@ -60,10 +56,19 @@ namespace ClinicManagement.Controllers
         [HttpGet]
         public IActionResult Manage()
         {
-            var usersDb = _userRepository.GetAll();
+            var usersDb = _userManager.Users;
             var users = _mapper.Map<IEnumerable<UserViewModel>>(usersDb);
 
             return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string userId)
+        {
+            var user = _userManager.Users.SingleOrDefault(u => u.Id.Equals(userId));
+            await _userManager.DeleteAsync(user);
+
+            return RedirectToAction("Manage");
         }
 
     }
