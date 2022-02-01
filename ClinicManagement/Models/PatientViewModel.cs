@@ -7,6 +7,7 @@ namespace ClinicManagement.Models
 {
     public class PatientViewModel
     {
+        public string PatientId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }

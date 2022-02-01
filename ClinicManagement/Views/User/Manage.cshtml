@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ClinicManagement.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "Edit users";
+}
+
+<table class="stripe" id="dataTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserRole)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserRole)
+                </td>
+                <td>
+                    <div class="dropdown btn-block">
+                        <button class="btn btn-xs btn-primary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Manage
+                            <span class="caret"></span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "dropdown-item" })
+                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#@item.UserId" style="cursor: pointer;">
+                                Remove
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- MODALS -->
+            <div class="modal fade" id="@item.UserId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">User @item.FirstName @item.LastName will be deleted!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span class="text-danger">Are you sure you want to perform this action? Changes will be irreversible!</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            @Html.ActionLink("Delete", "Delete", new {  id = item.UserId }, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/js/datatable.js"></script>
+}
