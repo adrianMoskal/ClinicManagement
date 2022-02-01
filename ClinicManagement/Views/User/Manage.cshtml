@@ -40,7 +40,7 @@
                             <span class="caret"></span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            @Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Edit", "Edit", new { userId = item.UserId }, new { @class = "dropdown-item" })
                             <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#@item.UserName" style="cursor: pointer;">
                                 Remove
                             </a>

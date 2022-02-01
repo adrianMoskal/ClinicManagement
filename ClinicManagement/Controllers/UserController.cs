@@ -63,6 +63,47 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
+        public IActionResult Edit(string userId)
+        {
+            var userDb = _userManager.Users.SingleOrDefault(u => u.Id.Equals(userId));
+            var user = _mapper.Map<UserEditViewModel>(userDb);
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserEditViewModel userViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userDb = _userManager.Users.SingleOrDefault(u => u.Id.Equals(userViewModel.UserId));
+                if (userDb != null)
+                {
+                    userDb.UserName = userViewModel.UserName;
+                    userDb.FirstName = userViewModel.FirstName;
+                    userDb.LastName = userViewModel.LastName;
+                    userDb.PhoneNumber = userViewModel.PhoneNumber;
+
+                    var result = await _userManager.UpdateAsync(userDb);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Manage");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(error.Code, error.Description);
+                        }
+                    }
+                }
+            }
+
+            return View(userViewModel);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Delete(string userId)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id.Equals(userId));
