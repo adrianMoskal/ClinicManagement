@@ -1,5 +1,6 @@
 ﻿.main-container {
     height: 100vh;
+    min-height: 750px;
     display: flex;
     justify-content: center;
     margin-left: 2rem;
@@ -9,8 +10,8 @@
 
 .table-box {
     width: 100%;
-    margin-top: 10rem;
     min-width: 650px;
+    margin-top: 10rem;
     height: fit-content;
     background-color: white;
     padding: 5rem;

@@ -17,12 +17,7 @@
     padding: 5rem;
 }
 
-#dataTable_wrapper {
-    width: 100%;
-    min-width: 435px;
+.edit-box {
+    width: 50%;
+    margin: auto;
 }
-
-    #dataTable_wrapper table th {
-        background-color: #0d6efd;
-        color: white;
-    }

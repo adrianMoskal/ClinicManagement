@@ -12,11 +12,11 @@
             @using (Html.BeginForm("Login", "Account", FormMethod.Post))
             {
                 <div class="form-input-container">
-                    @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { placeholder = "Username" } })<br />
+                    @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "text-center", placeholder = "Username" } })<br />
                     @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-input-container">
-                    @Html.EditorFor(m => m.Password, new { htmlAttributes = new { placeholder = "Password" } })<br />
+                    @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "text-center", placeholder = "Password" } })<br />
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-input-container">
