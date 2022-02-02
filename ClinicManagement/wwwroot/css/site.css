@@ -43,12 +43,23 @@ main {
 
 .login-container {
     height: 100vh;
-    background-image: url("../img/login_background.jpg");
-    background-size: cover;
-    padding-top: 5rem;
     display: flex;
+    padding-top: 5rem;
     justify-content: center;
 }
+
+    .login-container::after {
+        content: "";
+        background: url("../img/login_background.jpg");
+        background-size: cover;
+        opacity: 0.4;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+    }
 
 .login-box-container {
     height: 40rem;
@@ -107,9 +118,9 @@ main {
     height: 3rem;
     margin-top: 2rem;
 }
-.form-input-container button:hover {
-    box-shadow: 0 0 5pt 2pt #D3D3D3;
-}
+    .form-input-container button:hover {
+        box-shadow: 0 0 5pt 2pt #D3D3D3;
+    }
 
 
 
