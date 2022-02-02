@@ -31,7 +31,6 @@ namespace ClinicManagement.Controllers
         public async Task<IActionResult> Doctors()
         {
             var users = await _userManager.GetUsersInRoleAsync("Doctor");
-
             var doctors = _mapper.Map<IEnumerable<DoctorViewModel>>(users);
 
             return View(doctors);
@@ -41,7 +40,6 @@ namespace ClinicManagement.Controllers
         public async Task<IActionResult> Patients()
         {
             var users = await _userManager.GetUsersInRoleAsync("Patient");
-
             var patients = _mapper.Map<IEnumerable<PatientViewModel>>(users);
 
             return View(patients);

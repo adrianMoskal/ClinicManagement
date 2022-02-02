@@ -27,15 +27,14 @@
 
 
 /* Main */
+main {
+    background-color: #eee;
+}
 
 @media (min-width: 992px) {
     main {
         padding-left: 300px;
     }
-}
-
-main {
-    margin-top: 80px;
 }
 
 

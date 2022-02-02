@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("Styles", false)
 </head>
 <body>
 
@@ -19,7 +20,7 @@
             <nav id="sidebarMenu" class="collapse d-lg-block sidebar bg-white">
                 <div class="position-sticky">
                     <div class="list-group list-group-flush mt-5 mx-3">
-                        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                        <a href="/Home/Index" class="list-group-item list-group-item-action active" aria-current="true">
                             <span>Main site</span>
                         </a>
                         <a href="/User/Doctors" class="list-group-item list-group-item-action">
@@ -58,7 +59,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         <main>
-            <div class="container pt-5">
+            <div class="container-fluid">
                 @RenderBody()
             </div>
         </main>

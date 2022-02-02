@@ -1,0 +1,27 @@
+﻿.main-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    min-width: 340px;
+}
+
+.table-box {
+    width: 100%;
+    margin-top: 10rem;
+    min-width: 650px;
+    height: fit-content;
+    background-color: white;
+    padding: 5rem;
+}
+
+#dataTable_wrapper {
+    width: 100%;
+    min-width: 435px;
+}
+
+    #dataTable_wrapper table th {
+        background-color: #0d6efd;
+        color: white;
+    }
