@@ -76,7 +76,7 @@ namespace ClinicManagement.Data
                     UserName = "deanWinchester",
                     NormalizedUserName = "DEANWINCHESTER",
                     EmailConfirmed = false,
-                    PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==", // Password = deanWinchester1@
+                    PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==", // Password = Admin1@
                     SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
                     ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
                     PhoneNumber = "999888777",
@@ -93,7 +93,7 @@ namespace ClinicManagement.Data
                     UserName = "samWinchester",
                     NormalizedUserName = "SAMWINCHESTER",
                     EmailConfirmed = false,
-                    PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==", // Password = samWinchester1@
+                    PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==", // Password = Admin1@
                     SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
                     ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
                     PhoneNumber = "789456123",
@@ -110,7 +110,7 @@ namespace ClinicManagement.Data
                     UserName = "castielClarence",
                     NormalizedUserName = "CASTIELCLARENCE",
                     EmailConfirmed = false,
-                    PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==", // Password = castielClarence1@
+                    PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==", // Password = Admin1@
                     SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
                     ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
                     PhoneNumber = "888567000",
