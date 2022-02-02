@@ -9,30 +9,32 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    
+
     <!-- NAVIGATIONS -->
     <header>
 
         <!-- SIDEBAR -->
-        <nav id="sidebarMenu" class="collapse d-lg-block sidebar bg-white">
-            <div class="position-sticky">
-                <div class="list-group list-group-flush mt-5">
-                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                        <span>Main site</span>
-                    </a>
-                    <a href="/User/Doctors" class="list-group-item list-group-item-action">
-                        <span>Doctors</span>
-                    </a>
-                    <a href="/User/Patients" class="list-group-item list-group-item-action">
-                        <span>Patients</span>
-                    </a>
-                    <a href="/User/Panel" class="list-group-item list-group-item-action">
-                        <span>Admin panel</span>
-                    </a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar bg-white">
+                <div class="position-sticky">
+                    <div class="list-group list-group-flush mt-5 mx-3">
+                        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            <span>Main site</span>
+                        </a>
+                        <a href="/User/Doctors" class="list-group-item list-group-item-action">
+                            <span><img src="~/img/stethoscope.svg" class="decoration-icon" />Doctors</span>
+                        </a>
+                        <a href="/User/Patients" class="list-group-item list-group-item-action">
+                            <span><img src="~/img/following.svg" class="decoration-icon" />Patients</span>
+                        </a>
+                        <a href="/User/Panel" class="list-group-item list-group-item-action">
+                            <span><img src="~/img/document.svg" class="decoration-icon" />Admin panel</span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </nav>
-
+            </nav>
+        }
         <!-- TOP NAVBAR -->
         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <div class="container-fluid">
@@ -53,12 +55,18 @@
     </header>
 
     <!-- MAIN -->
-    <main>
-        <div class="container pt-5">
-            @RenderBody()
-        </div>
-    </main>
-
+    @if (User.Identity.IsAuthenticated)
+    {
+        <main>
+            <div class="container pt-5">
+                @RenderBody()
+            </div>
+        </main>
+    }
+    else
+    {
+        @RenderBody()
+    }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
