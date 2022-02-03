@@ -28,6 +28,15 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
+        public IActionResult Profile()
+        {
+            var currentUser = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(User.Identity.Name));
+            var user = _mapper.Map<UserProfileViewModel>(currentUser);
+
+            return View(user);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Doctors()
         {
             var users = await _userManager.GetUsersInRoleAsync("Doctor");

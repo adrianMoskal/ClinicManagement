@@ -23,6 +23,8 @@ namespace ClinicManagement.Profiles
 
             CreateMap<User, UserEditViewModel>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<User, UserProfileViewModel>();
         }
     }
 }

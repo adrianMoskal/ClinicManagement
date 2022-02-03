@@ -1,0 +1,50 @@
+﻿.main-container {
+    height: 100vh;
+    min-height: 750px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.profile-box {
+    width: 100%;
+    margin-top: 10rem;
+    height: fit-content;
+    background-color: white;
+    padding: 5rem;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    line-height: 7rem;
+}
+    .profile-box .profile-picture {
+        width: 200px;
+        height: 200px;
+        background-color: black;
+    }
+
+    .profile-box .profile-info table td {
+        text-align: right;
+        padding-right: 5rem;
+    }
+
+.table-box {
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    padding: 5rem;
+    margin-top: 3rem;
+    flex-shrink: 0;
+}
+
+#dataTable_wrapper {
+    width: 100%;
+    min-width: 435px;
+}
+
+    #dataTable_wrapper table th {
+        background-color: #0d6efd;
+        color: white;
+    }

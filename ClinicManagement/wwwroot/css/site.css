@@ -1,5 +1,14 @@
-﻿/* Sidebar */
+﻿/* Navbar */
 
+.profile-circle {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+
+/* Sidebar */
 .sidebar {
     position: fixed;
     top: 0;

@@ -1,0 +1,70 @@
+﻿@model ClinicManagement.Models.UserProfileViewModel
+
+@{
+    ViewBag.Title = "Edit users";
+}
+
+<div class="main-container">
+    <div class="profile-box">
+        <div class="rounded-circle profile-picture"></div>
+        <div class="profile-info">
+            <table>
+                <tr>
+                    <th>First name:</th>
+                    <td>@Model.FirstName</td>
+                    <th>Last name:</th>
+                    <td>@Model.LastName</td>
+                </tr>
+                <tr>
+                    <th>Phone:</th>
+                    <td>@Model.PhoneNumber</td>
+                    <th>Address:</th>
+                    <td>Lorem ipsum</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="table-box">
+        <table class="stripe" id="dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                    </tr>
+                }*@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Styles {
+    <link href="@Url.Content("~/css/profile.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/js/datatable.js"></script>
+}
