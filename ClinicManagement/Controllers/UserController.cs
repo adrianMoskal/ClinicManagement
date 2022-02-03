@@ -2,6 +2,7 @@
 using ClinicManagement.Data;
 using ClinicManagement.Entities;
 using ClinicManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace ClinicManagement.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -31,6 +33,7 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator,Doctor,Patient")]
         public IActionResult Profile()
         {
             var currentUser = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(User.Identity.Name));
@@ -41,6 +44,7 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator,Patient")]
         public async Task<IActionResult> Doctors()
         {
             var users = await _userManager.GetUsersInRoleAsync("Doctor");
@@ -50,6 +54,7 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator,Doctor")]
         public async Task<IActionResult> Patients()
         {
             var users = await _userManager.GetUsersInRoleAsync("Patient");
@@ -59,12 +64,14 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Panel()
         {
             return View();
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Manage()
         {
             var usersDb = _userManager.Users;
@@ -74,6 +81,7 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(string userId)
         {
             var userDb = _userManager.Users.SingleOrDefault(u => u.Id.Equals(userId));
@@ -83,6 +91,7 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(UserEditViewModel userViewModel)
         {
             if (ModelState.IsValid)
@@ -115,6 +124,7 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(string userId)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id.Equals(userId));

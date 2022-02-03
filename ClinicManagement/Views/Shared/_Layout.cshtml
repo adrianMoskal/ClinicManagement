@@ -23,15 +23,24 @@
                         <a href="/Home/Index" class="list-group-item list-group-item-action active" aria-current="true">
                             <span>Main site</span>
                         </a>
-                        <a href="/User/Doctors" class="list-group-item list-group-item-action">
-                            <span><img src="~/img/stethoscope.svg" class="decoration-icon" />Doctors</span>
-                        </a>
-                        <a href="/User/Patients" class="list-group-item list-group-item-action">
-                            <span><img src="~/img/following.svg" class="decoration-icon" />Patients</span>
-                        </a>
-                        <a href="/User/Panel" class="list-group-item list-group-item-action">
-                            <span><img src="~/img/document.svg" class="decoration-icon" />Admin panel</span>
-                        </a>
+                        @if (User.IsInRole("Patient") || User.IsInRole("Administrator"))
+                        {
+                            <a href="/User/Doctors" class="list-group-item list-group-item-action">
+                                <span><img src="~/img/stethoscope.svg" class="decoration-icon" />Doctors</span>
+                            </a>
+                        }
+                        @if (User.IsInRole("Doctor") || User.IsInRole("Administrator"))
+                        {
+                            <a href="/User/Patients" class="list-group-item list-group-item-action">
+                                <span><img src="~/img/following.svg" class="decoration-icon" />Patients</span>
+                            </a>
+                        }
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <a href="/User/Panel" class="list-group-item list-group-item-action">
+                                <span><img src="~/img/document.svg" class="decoration-icon" />Admin panel</span>
+                            </a>
+                        }
                     </div>
                 </div>
             </nav>
