@@ -54,6 +54,7 @@ main {
     display: flex;
     padding-top: 5rem;
     justify-content: center;
+    align-items: center;
 }
 
     .login-container::after {
@@ -72,7 +73,6 @@ main {
 .login-box-container {
     height: 40rem;
     width: 80rem;
-    margin-top: 12rem;
     border-radius: 2rem;
     display: flex;
     -webkit-box-shadow: 2px 8px 24px 0px rgba(66, 68, 90, 1);
