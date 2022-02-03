@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ClinicManagement.Data;
 using ClinicManagement.Entities;
 using ClinicManagement.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -17,14 +16,12 @@ namespace ClinicManagement.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public UserController(UserManager<User> userManager, IMapper mapper, ApplicationDbContext context)
+        public UserController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager;
             _mapper = mapper;
-            _context = context;
         }
 
         public IActionResult Index()
