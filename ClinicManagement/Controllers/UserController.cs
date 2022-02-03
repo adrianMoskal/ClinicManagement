@@ -4,6 +4,7 @@ using ClinicManagement.Entities;
 using ClinicManagement.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,14 @@ namespace ClinicManagement.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public UserController(UserManager<User> userManager, IMapper mapper)
+        public UserController(UserManager<User> userManager, IMapper mapper, ApplicationDbContext context)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -31,6 +34,7 @@ namespace ClinicManagement.Controllers
         public IActionResult Profile()
         {
             var currentUser = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
             var user = _mapper.Map<UserProfileViewModel>(currentUser);
 
             return View(user);

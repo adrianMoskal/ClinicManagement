@@ -11,9 +11,16 @@ namespace ClinicManagement.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, string, IdentityUserClaim<string>, UserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
+        public DbSet<Appointment> Appointments { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -21,6 +28,8 @@ namespace ClinicManagement.Data
             base.OnModelCreating(builder);
 
             // Configurations
+
+            #region Identity
 
             builder.Entity<User>()
                 .ToTable("Users");
@@ -44,6 +53,28 @@ namespace ClinicManagement.Data
             builder.Entity<IdentityUserToken<string>>()
                 .ToTable("UserTokens");
 
+            #endregion
+
+            #region Appointments
+
+            builder.Entity<Appointment>()
+                .HasKey(a => a.AppointmentId);
+
+            builder.Entity<Appointment>()
+                .HasOne(a => a.Doctor)
+                .WithMany(u => u.AppointmentsDoc)
+                .HasForeignKey(a => a.DoctorId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
+
+            builder.Entity<Appointment>()
+                .HasOne(a => a.Patient)
+                .WithMany(u => u.AppointmentsPat)
+                .HasForeignKey(a => a.PatientId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
+
+            #endregion
 
             // DummyData
 
@@ -221,6 +252,34 @@ namespace ClinicManagement.Data
                     UserId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
                     RoleId = "d428231e-4f51-4e41-913e-056f91346c16"
                 });
+
+            #endregion
+
+            #region Appointments
+
+            builder.Entity<Appointment>()
+                .HasData(
+                    new Appointment
+                    {
+                        AppointmentId = 1,
+                        PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
+                        DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
+                        Date = DateTime.Now.AddDays(-5)
+                    },
+                    new Appointment
+                    {
+                        AppointmentId = 2,
+                        PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
+                        DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
+                        Date = DateTime.Now.AddDays(-3)
+                    },
+                    new Appointment
+                    {
+                        AppointmentId = 3,
+                        PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
+                        DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
+                        Date = DateTime.Now.AddDays(-1)
+                    });
 
             #endregion
         }

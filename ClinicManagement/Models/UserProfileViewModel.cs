@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicManagement.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,5 +20,7 @@ namespace ClinicManagement.Models
 
         [DisplayName("Phone number")]
         public string PhoneNumber { get; set; }
+
+        public IEnumerable<AppointmentViewModel> Appointments { get; set; }
     }
 }

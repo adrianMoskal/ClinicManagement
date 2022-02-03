@@ -29,31 +29,25 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.FirstName)
+                        @Html.DisplayNameFor(model => model.Appointments.FirstOrDefault().Date)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LastName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                        @Html.DisplayNameFor(model => model.Appointments.FirstOrDefault().DoctorName)
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @*@foreach (var item in Model)
+                @foreach (var item in Model.Appointments)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.Date)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            @Html.DisplayFor(modelItem => item.DoctorName)
                         </td>
                     </tr>
-                }*@
+                }
             </tbody>
         </table>
     </div>
