@@ -13,6 +13,7 @@ namespace ClinicManagement.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<UserSpecialty> UserSpecialties { get; set; }
 
         public virtual ICollection<Appointment> AppointmentsDoc { get; set; } // For Doctors
 

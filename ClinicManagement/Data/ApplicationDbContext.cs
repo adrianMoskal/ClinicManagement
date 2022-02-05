@@ -12,6 +12,7 @@ namespace ClinicManagement.Data
     public class ApplicationDbContext : IdentityDbContext<User, Role, string, IdentityUserClaim<string>, UserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Specialty> Specialties { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -58,6 +59,9 @@ namespace ClinicManagement.Data
             #region Appointments
 
             builder.Entity<Appointment>()
+                .ToTable("Appointments");
+
+            builder.Entity<Appointment>()
                 .HasKey(a => a.AppointmentId);
 
             builder.Entity<Appointment>()
@@ -73,6 +77,32 @@ namespace ClinicManagement.Data
                 .HasForeignKey(a => a.PatientId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
+
+            #endregion
+
+            #region Specialties
+
+            builder.Entity<Specialty>()
+                .ToTable("Specialties");
+
+            builder.Entity<Specialty>()
+               .HasKey(a => a.SpecialtyId);
+
+            builder.Entity<UserSpecialty>()
+                .ToTable("UserSpecialties");
+
+            builder.Entity<UserSpecialty>()
+                .HasKey(us => new { us.UserId, us.SpecialtyId });
+
+            builder.Entity<UserSpecialty>()
+                .HasOne<User>(us => us.Doctor)
+                .WithMany(u => u.UserSpecialties)
+                .HasForeignKey(us => us.UserId);
+
+            builder.Entity<UserSpecialty>()
+                .HasOne<Specialty>(us => us.Specialty)
+                .WithMany(s => s.UserSpecialties)
+                .HasForeignKey(us => us.SpecialtyId);
 
             #endregion
 
@@ -280,6 +310,110 @@ namespace ClinicManagement.Data
                         DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
                         Date = DateTime.Now.AddDays(-1)
                     });
+
+            #endregion
+
+            #region Specialties
+
+            builder.Entity<Specialty>()
+                .HasData(
+                    new Specialty
+                    {
+                        SpecialtyId = 1,
+                        Name = "Allergy and immunology"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 2,
+                        Name = "Cardiology"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 3,
+                        Name = "Dermatology"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 4,
+                        Name = "Endocrinology"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 5,
+                        Name = "Family medicine"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 6,
+                        Name = "Geriatrics"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 7,
+                        Name = "Hematology"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 8,
+                        Name = "Neurology"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 9,
+                        Name = "Hematology"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 10,
+                        Name = "Pathology"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 11,
+                        Name = "Pediatrics"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 12,
+                        Name = "Psychiatry"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 13,
+                        Name = "Rheumatology"
+                    },
+                    new Specialty
+                    {
+                        SpecialtyId = 14,
+                        Name = "Urology"
+                    });
+
+            #endregion
+
+            #region UserSpecialty
+
+            builder.Entity<UserSpecialty>()
+                .HasData(
+                new UserSpecialty
+                {
+                    UserId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
+                    SpecialtyId = 5
+                },
+                new UserSpecialty
+                {
+                    UserId = "40ae9fef-c94e-4823-a4da-bd1686467689",
+                    SpecialtyId = 5
+                },
+                new UserSpecialty
+                {
+                    UserId = "80d10f83-f746-4397-a76f-fa2a216833bc",
+                    SpecialtyId = 2
+                },
+                new UserSpecialty
+                {
+                    UserId = "80d10f83-f746-4397-a76f-fa2a216833bc",
+                    SpecialtyId = 13
+                });
 
             #endregion
         }
