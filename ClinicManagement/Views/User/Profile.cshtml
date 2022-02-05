@@ -31,22 +31,41 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Appointments.FirstOrDefault().Date)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Appointments.FirstOrDefault().DoctorName)
-                    </th>
+                    @if (User.IsInRole("Doctor"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.Appointments.FirstOrDefault().PatientName)
+                        </th>
+                    }
+                    else if (User.IsInRole("Patient"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.Appointments.FirstOrDefault().DoctorName)
+                        </th>
+                    }
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.Appointments)
                 {
-                    <tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    @if (User.IsInRole("Doctor"))
+                    {
                         <td>
-                            @Html.DisplayFor(modelItem => item.Date)
+                            @Html.DisplayFor(modelItem => item.PatientName)
                         </td>
+                    }
+                    else if (User.IsInRole("Patient"))
+                    {
                         <td>
                             @Html.DisplayFor(modelItem => item.DoctorName)
                         </td>
-                    </tr>
+                    }
+
+                </tr>
                 }
             </tbody>
         </table>
