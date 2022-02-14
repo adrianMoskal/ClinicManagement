@@ -14,6 +14,7 @@ namespace ClinicManagement.Profiles
         {
             CreateMap<User, DoctorViewModel>()
                 .ForMember(dest => dest.DoctorId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
                 .ForMember(dest => dest.Specialties, opt => opt.MapFrom(src => string.Join(", ", src.UserSpecialties.Select(us => us.Specialty.Name))));
 
             CreateMap<User, PatientViewModel>()

@@ -6,6 +6,14 @@
 
 <div class="main-container">
     <div class="table-box">
+        @if (User.IsInRole("Patient"))
+        {
+            <div class="options-box">
+                <div class="options-items">
+                    @Html.ActionLink("Make an appointment", "Create", "Appointment", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        }
         <table class="stripe" id="dataTable">
             <thead>
                 <tr>

@@ -21,6 +21,8 @@
                     <th>
                         @Html.DisplayNameFor(model => model.PhoneNumber)
                     </th>
+                    <th>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +40,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Make an appointment", "Create", "Appointment", new { doctorId = item.DoctorId }, new { @class = "btn btn-primary" })
                     </td>
                 </tr>
                 }
