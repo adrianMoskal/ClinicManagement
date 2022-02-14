@@ -5,6 +5,8 @@
     height: 2rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    background-size: cover;
+    background-position:center;
 }
 
 
@@ -59,7 +61,7 @@ main {
 
     .login-container::after {
         content: "";
-        background: url("../img/login_background.jpg");
+        background: url("../img/icons/login_background.jpg");
         background-size: cover;
         opacity: 0.4;
         top: 0;
@@ -73,7 +75,7 @@ main {
 .login-box-container {
     height: 40rem;
     width: 80rem;
-    border-radius: 2rem;
+    border-radius: 1rem;
     display: flex;
     -webkit-box-shadow: 2px 8px 24px 0px rgba(66, 68, 90, 1);
     -moz-box-shadow: 2px 8px 24px 0px rgba(66, 68, 90, 1);
@@ -82,17 +84,17 @@ main {
 
 .box-right {
     width: 50%;
-    background-image: url("../img/login-main.jpg");
+    background-image: url("../img/icons/login-main.jpg");
     background-size: cover;
     background-position: center;
-    border-radius: 2rem 0 0 2rem;
+    border-radius: 1rem 0 0 1rem;
 }
 
 .box-left {
     width: 50%;
     background-color: white;
     
-    border-radius: 0 2rem 2rem 0;
+    border-radius: 0 1rem 1rem 0;
 }
 
     .box-left .form-title {

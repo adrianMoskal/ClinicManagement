@@ -2,7 +2,7 @@
 {
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            @User.Identity.Name<div class="bg-dark rounded-circle profile-circle"></div>
+            @User.Identity.Name <div class="rounded-circle profile-circle" style="background-image: url('@Url.Content("~/img/profiles/"+User.Identity.Name+".jpg")')"></div>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="/User/Profile">Profile info</a></li>

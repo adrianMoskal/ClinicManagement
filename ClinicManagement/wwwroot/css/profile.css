@@ -23,7 +23,8 @@
     .profile-box .profile-picture {
         width: 200px;
         height: 200px;
-        background-color: black;
+        background-size: cover;
+        background-position: center;
     }
 
     .profile-box .profile-info table td {
