@@ -1,33 +1,37 @@
 ﻿$(document).ready(function () {
+    fillSpecialties();
+
+    addOnChangeSpecialty();
+});
+
+function fillSpecialties() {
     $.ajax({
         url: "../Appointment/AllSpecialties",
         method: "get",
         contentType: "application/json"
     })
-    .done(res => {
-        fillSpecialties(res);
-    });
+        .done(res => {
+            $("#SpecialtyId").append($("<option></option>").attr("value", "").text("Specialty"));
+            for (let el of res) {
+                $("#SpecialtyId").append($("<option></option>").attr("value", el.specialtyId).text(el.name));
+            }
+        }); 
+}
 
+function addOnChangeSpecialty() {
     $("#SpecialtyId").on("change", function (e) {
         $.ajax({
             url: "../Appointment/AllDoctorsInSpecialty",
-            method: "get", 
+            method: "get",
             contentType: "application/json",
             data: {
                 specialtyId: this.value,
             }
         })
-        .done(res => {
-            fillDoctors(res);
-        });
+            .done(res => {
+                fillDoctors(res);
+            });
     });
-});
-
-function fillSpecialties(data) {
-    $("#SpecialtyId").append($("<option></option>").attr("value", "").text("Specialty"));
-    for (let el of data) {
-        $("#SpecialtyId").append($("<option></option>").attr("value", el.specialtyId).text(el.name));
-    }
 }
 
 function fillDoctors(data) {
