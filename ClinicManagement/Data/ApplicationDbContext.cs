@@ -13,6 +13,7 @@ namespace ClinicManagement.Data
     {
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
+        public DbSet<AppointmentHour> AppointmentHours { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -103,6 +104,20 @@ namespace ClinicManagement.Data
                 .HasOne<Specialty>(us => us.Specialty)
                 .WithMany(s => s.UserSpecialties)
                 .HasForeignKey(us => us.SpecialtyId);
+
+            #endregion
+
+            #region AppointmentHours
+
+            builder.Entity<AppointmentHour>()
+                .ToTable("AppointmentHours");
+
+            builder.Entity<AppointmentHour>()
+                .HasKey(a => a.AppointmentHourId);
+
+            builder.Entity<AppointmentHour>()
+                .HasIndex(a => a.Hour)
+                .IsUnique();
 
             #endregion
 
@@ -414,6 +429,93 @@ namespace ClinicManagement.Data
                     UserId = "80d10f83-f746-4397-a76f-fa2a216833bc",
                     SpecialtyId = 13
                 });
+
+            #endregion
+
+            #region AppointmentHours
+
+            builder.Entity<AppointmentHour>()
+                .HasData(
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 1,
+                        Hour = "8:00"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 2,
+                        Hour = "8:30"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 3,
+                        Hour = "9:00"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 4,
+                        Hour = "9:30"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 5,
+                        Hour = "10:00"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 6,
+                        Hour = "10:30"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 7,
+                        Hour = "11:00"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 8,
+                        Hour = "11:30"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 9,
+                        Hour = "12:00"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 10,
+                        Hour = "12:30"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 11,
+                        Hour = "13:00"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 12,
+                        Hour = "13:30"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 13,
+                        Hour = "14:00"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 14,
+                        Hour = "14:30"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 15,
+                        Hour = "15:00"
+                    },
+                    new AppointmentHour
+                    {
+                        AppointmentHourId = 16,
+                        Hour = "15:30"
+                    });
 
             #endregion
         }
