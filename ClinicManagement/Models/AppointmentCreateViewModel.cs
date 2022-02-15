@@ -10,13 +10,8 @@ namespace ClinicManagement.Models
     public class AppointmentCreateViewModel
     {
         public string DoctorId { get; set; }
-
-        [DisplayName("Doctors")]
-        public SelectList Doctors { get; set; }
-
+        public DoctorViewModel Doctor { get; set; }
         public int? SpecialtyId { get; set; }
-
-        [DisplayName("Specialties")]
-        public SelectList Specialties { get; set; }
+        public SpecialtyViewModel Specialty { get; set; }
     }
 }

@@ -7,8 +7,7 @@
     margin-right: 2rem;
     min-width: 340px;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .options-box {
@@ -18,13 +17,15 @@
     justify-content: flex-end;
 }
 
+    .options-box > a {
+        width: 200px;
+        height: 100px;
+    }
+
 .options-items {
     display: flex;
     align-items: center;
-}
-.options-box > a {
-    width: 200px;
-    height: 100px;
+    margin-bottom: 5rem;
 }
 
 .table-box {
@@ -33,13 +34,12 @@
     height: fit-content;
     background-color: white;
     margin-top: 10rem;
-    padding: 2rem 5rem 5rem 5rem;
+    padding: 5rem;
 }
 
 #dataTable_wrapper {
     width: 100%;
     min-width: 435px;
-    margin-top: 1rem;
 }
 
     #dataTable_wrapper table th {
@@ -66,4 +66,17 @@
 
 .form-select {
     width: 200px;
+}
+
+.form-group button {
+    margin-top: 1.3rem;
+}
+
+.doctor-availability {
+    width: 100%;
+    min-width: 750px;
+    height: fit-content;
+    background-color: white;
+    margin-top: 2rem;
+    padding: 5rem;
 }

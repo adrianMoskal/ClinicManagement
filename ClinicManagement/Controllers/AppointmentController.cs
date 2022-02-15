@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicManagement.Controllers
 {
@@ -18,13 +19,11 @@ namespace ClinicManagement.Controllers
     public class AppointmentController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
         public AppointmentController(ApplicationDbContext context, UserManager<User> userManager, IMapper mapper)
         {
             _context = context;
-            _userManager = userManager;
             _mapper = mapper;
         }
 
@@ -41,30 +40,41 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            var doctors = await _userManager.GetUsersInRoleAsync("Doctor");
-            var doctorsVM = _mapper.Map<IEnumerable<DoctorViewModel>>(doctors);
+            var specialties = _context.Specialties;
+            var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
 
             var model = new AppointmentCreateViewModel();
-            model.Doctors = new SelectList(doctorsVM, "DoctorId", "FullName");
-
             return View(model);
         }
 
         [HttpPost]
-        public string Create(AppointmentCreateViewModel model)
+        public IActionResult Create(AppointmentCreateViewModel model)
         {
-            if(ModelState.IsValid)
+            if(model.SpecialtyId != null && model.DoctorId != null)
             {
-                if(model.DoctorId != null)
-                {
-                    var doctor = _context.Users.Single(u => u.Id.Equals(model.DoctorId));
-                    return doctor.FirstName + doctor.LastName;
-                }
+                var doctor = _context.Users.Single(u => u.Id.Equals(model.DoctorId));
+                model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
+
+                var specialty = _context.Specialties.Single(s => s.SpecialtyId.Equals(model.SpecialtyId));
+                model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
             }
-            return "Test";
-           
+            return View(model);
+        }
+
+        public async Task<JsonResult> AllDoctorsInSpecialty(int specialtyId)
+        {
+            var doctors = await _context.Users.Where(u => u.UserSpecialties.Any(us => us.SpecialtyId == specialtyId)).ToListAsync();
+            var doctorsVM = _mapper.Map<IEnumerable<DoctorViewModel>>(doctors);
+            return Json(doctorsVM);
+        }
+
+        public async Task<JsonResult> AllSpecialties()
+        {
+            var specialties = await _context.Specialties.ToListAsync();
+            var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
+            return Json(specialtiesVM);
         }
     }
 }

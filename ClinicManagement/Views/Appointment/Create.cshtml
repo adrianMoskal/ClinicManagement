@@ -8,13 +8,37 @@
     <div class="filters-box">
         @using (Html.BeginForm("Create", "Appointment", FormMethod.Post))
         {
-            <div>
-                @Html.LabelFor(m => m.Doctors)
-                @Html.DropDownListFor(m => m.DoctorId, Model.Doctors, "Name", new { @class = "form-select" })
+        <div class="form-group">
+            <label for="SpecialtyId">Specialties</label>
+            <select name="SpecialtyId" id="SpecialtyId" class="form-select">
+            </select>
+        </div>
+
+            <div class="form-group">
+                <label for="DoctorId">Doctors</label>
+                <select name="DoctorId" id="DoctorId" class="form-select" disabled>
+                </select>
             </div>
-            <button type="submit" class="btn btn-primary">Show working hours</button>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Check availability</button>
+            </div>
         }
     </div>
+    @if (Model.Doctor != null)
+    {
+        <div class="doctor-availability">
+            <p>
+                <b>Doctor:</b> @Model.Doctor.FullName
+            </p>
+            <p>
+                <b>Specialty:</b> @Model.Specialty.Name
+            </p>
+            <p>
+                <b>Date:</b> <input type="date" />
+            </p>
+        </div>
+    }
 </div>
 
 @section Styles {
@@ -23,6 +47,5 @@
 
 @section Scripts{
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
-    <script src="~/js/datatable.js"></script>
+    <script src="~/js/appointments.js"></script>
 }
