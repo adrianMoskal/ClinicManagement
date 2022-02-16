@@ -40,7 +40,7 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Availability()
         {
             var specialties = _context.Specialties;
             var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
@@ -50,7 +50,7 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(AppointmentCreateViewModel model)
+        public IActionResult Availability(AppointmentCreateViewModel model)
         {
             if(model.SpecialtyId != null && model.DoctorId != null)
             {
@@ -59,6 +59,9 @@ namespace ClinicManagement.Controllers
 
                 var specialty = _context.Specialties.Single(s => s.SpecialtyId.Equals(model.SpecialtyId));
                 model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
+
+                var appointmentHours = _context.AppointmentHours.ToList();
+                model.AppointmentHours = _mapper.Map<IEnumerable<AppointmentHourViewModel>>(appointmentHours);
             }
             return View(model);
         }

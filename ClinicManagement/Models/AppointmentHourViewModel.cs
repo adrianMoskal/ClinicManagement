@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ClinicManagement.Entities
+namespace ClinicManagement.Models
 {
-    public class AppointmentHour
+    public class AppointmentHourViewModel
     {
         public int AppointmentHourId { get; set; }
         public string Hour { get; set; }
-        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }

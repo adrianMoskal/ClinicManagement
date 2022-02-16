@@ -6,7 +6,7 @@
 
 <div class="main-container">
     <div class="filters-box">
-        @using (Html.BeginForm("Create", "Appointment", FormMethod.Post))
+        @using (Html.BeginForm("Availability", "Appointment", FormMethod.Post))
         {
             <div class="form-group">
                 <label for="SpecialtyId">Specialties</label>
@@ -33,16 +33,24 @@
     @if (Model.Doctor != null)
     {
         <div class="doctor-availability">
-            <p>
-                <b>Doctor:</b> @Model.Doctor.FullName
-            </p>
-            <p>
-                <b>Specialty:</b> @Model.Specialty.Name
-            </p>
-            <p>
-                <b>Date:</b> <span id="calendar-value">Pick date</span>
-                <div id="calendar" />
-            </p>
+            <div class="left">
+                <p>
+                    <b>Doctor:</b> @Model.Doctor.FullName
+                </p>
+                <p>
+                    <b>Specialty:</b> @Model.Specialty.Name
+                </p>
+                <p>
+                    <b>Date:</b> <span id="calendar-value">Pick date</span>
+                    <div id="calendar"></div>
+                </p>
+            </div>
+            <div class="right">
+                @foreach (var hour in Model.AppointmentHours)
+                {
+                    <p>@hour.Hour</p>
+                }
+            </div>
         </div>
     }
 </div>

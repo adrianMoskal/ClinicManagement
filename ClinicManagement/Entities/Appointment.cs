@@ -13,6 +13,8 @@ namespace ClinicManagement.Entities
         public virtual User Patient { get; set; }
         public string DoctorId { get; set; }
         public virtual User Doctor { get; set; }
+        public int AppointmentHourId { get; set; }
+        public virtual AppointmentHour Hour { get; set; }
         public DateTime Date { get; set; }
     }
 }

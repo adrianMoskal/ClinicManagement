@@ -13,5 +13,7 @@ namespace ClinicManagement.Models
         public DoctorViewModel Doctor { get; set; }
         public int? SpecialtyId { get; set; }
         public SpecialtyViewModel Specialty { get; set; }
+
+        public IEnumerable<AppointmentHourViewModel> AppointmentHours { get; set; }
     }
 }

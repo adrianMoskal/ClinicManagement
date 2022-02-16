@@ -79,6 +79,11 @@ namespace ClinicManagement.Data
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
+            builder.Entity<Appointment>()
+                .HasOne(a => a.Hour)
+                .WithMany(ah => ah.Appointments)
+                .HasForeignKey(a => a.AppointmentHourId);
+
             #endregion
 
             #region Specialties
@@ -309,6 +314,7 @@ namespace ClinicManagement.Data
                         AppointmentId = 1,
                         PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                         DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
+                        AppointmentHourId = 5,
                         Date = DateTime.Now.AddDays(-5)
                     },
                     new Appointment
@@ -316,6 +322,7 @@ namespace ClinicManagement.Data
                         AppointmentId = 2,
                         PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                         DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
+                        AppointmentHourId = 2,
                         Date = DateTime.Now.AddDays(-3)
                     },
                     new Appointment
@@ -323,6 +330,7 @@ namespace ClinicManagement.Data
                         AppointmentId = 3,
                         PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                         DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
+                        AppointmentHourId = 7,
                         Date = DateTime.Now.AddDays(-1)
                     });
 

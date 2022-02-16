@@ -16,7 +16,8 @@ namespace ClinicManagement.Profiles
             AddPatientMapping();
             AddDoctorMapping();
             AddAppointmentMapping();
-            AddSpecialtiesMapping();
+            AddAppointmentHourMapping();
+            AddSpecialtyMapping();
         }
 
         #region User
@@ -63,19 +64,28 @@ namespace ClinicManagement.Profiles
         {
             CreateMap<Appointment, AppointmentViewModel>()
                 .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => $"{src.Doctor.FirstName} {src.Doctor.LastName}"))
-                .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => $"{src.Patient.FirstName} {src.Patient.LastName}"));
+                .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => $"{src.Patient.FirstName} {src.Patient.LastName}"))
+                .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.Hour.Hour));
+        }
+
+        #endregion
+
+        #region AppointmentHour
+
+        public void AddAppointmentHourMapping()
+        {
+            CreateMap<AppointmentHour, AppointmentHourViewModel>();
         }
 
         #endregion
 
         #region Specialties
 
-        public void AddSpecialtiesMapping()
+        public void AddSpecialtyMapping()
         {
             CreateMap<Specialty, SpecialtyViewModel>();
         }
 
         #endregion
-
     }
 }

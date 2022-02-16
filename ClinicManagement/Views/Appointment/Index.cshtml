@@ -10,7 +10,7 @@
         {
             <div class="options-box">
                 <div class="options-items">
-                    @Html.ActionLink("Make an appointment", "Create", "Appointment", null, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Make an appointment", "Availability", "Appointment", null, new { @class = "btn btn-primary" })
                 </div>
             </div>
         }
@@ -19,6 +19,9 @@
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Hour)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorName)
@@ -31,17 +34,20 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DoctorName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PatientName)
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoctorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientName)
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
