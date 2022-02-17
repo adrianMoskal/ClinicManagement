@@ -45,11 +45,7 @@
                     <div id="calendar"></div>
                 </p>
             </div>
-            <div class="right">
-                @foreach (var hour in Model.AppointmentHours)
-                {
-                    <p>@hour.Hour</p>
-                }
+            <div class="right" id="hours">
             </div>
         </div>
     }

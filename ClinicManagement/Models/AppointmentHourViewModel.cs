@@ -7,7 +7,8 @@ namespace ClinicManagement.Models
 {
     public class AppointmentHourViewModel
     {
-        public int AppointmentHourId { get; set; }
+        public int HourId { get; set; }
         public string Hour { get; set; }
+        public bool Availability { get; set; }
     }
 }

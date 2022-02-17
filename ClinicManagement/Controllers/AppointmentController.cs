@@ -59,11 +59,15 @@ namespace ClinicManagement.Controllers
 
                 var specialty = _context.Specialties.Single(s => s.SpecialtyId.Equals(model.SpecialtyId));
                 model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
-
-                var appointmentHours = _context.AppointmentHours.ToList();
-                model.AppointmentHours = _mapper.Map<IEnumerable<AppointmentHourViewModel>>(appointmentHours);
             }
             return View(model);
+        }
+
+        public async Task<JsonResult> AllSpecialties()
+        {
+            var specialties = await _context.Specialties.ToListAsync();
+            var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
+            return Json(specialtiesVM);
         }
 
         public async Task<JsonResult> AllDoctorsInSpecialty(int specialtyId)
@@ -73,11 +77,20 @@ namespace ClinicManagement.Controllers
             return Json(doctorsVM);
         }
 
-        public async Task<JsonResult> AllSpecialties()
+        public async Task<JsonResult> DoctorAvailability(string doctorId, DateTime date)
         {
-            var specialties = await _context.Specialties.ToListAsync();
-            var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
-            return Json(specialtiesVM);
+            var appointmentHours = await _context.AppointmentHours.ToListAsync();
+            var appointmentHoursVM = _mapper.Map<List<AppointmentHourViewModel>>(appointmentHours);
+
+            var doctorAppointments = _context.Appointments.Where(a => a.DoctorId.Equals(doctorId) && a.Date.Date.CompareTo(date.Date) == 0).Select(a => a.AppointmentHourId);
+
+            for (int i = 0; i < appointmentHoursVM.Count(); i++)
+            {
+                if (!doctorAppointments.Contains(appointmentHoursVM[i].HourId))
+                    appointmentHoursVM[i].Availability = true;
+            }
+
+            return Json(appointmentHoursVM);
         }
     }
 }
