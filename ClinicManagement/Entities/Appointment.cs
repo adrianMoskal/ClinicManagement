@@ -8,7 +8,7 @@ namespace ClinicManagement.Entities
 {
     public class Appointment
     {
-        public int AppointmentId { get; set; }
+        public long Id { get; set; }
         public string PatientId { get; set; }
         public virtual User Patient { get; set; }
         public string DoctorId { get; set; }

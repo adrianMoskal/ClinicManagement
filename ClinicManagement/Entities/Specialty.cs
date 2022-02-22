@@ -7,7 +7,7 @@ namespace ClinicManagement.Entities
 {
     public class Specialty
     {
-        public int SpecialtyId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public virtual ICollection<UserSpecialty> UserSpecialties { get; set; }
     }

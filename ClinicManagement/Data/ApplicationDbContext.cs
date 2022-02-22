@@ -63,7 +63,10 @@ namespace ClinicManagement.Data
                 .ToTable("Appointments");
 
             builder.Entity<Appointment>()
-                .HasKey(a => a.AppointmentId);
+                .Property(a => a.Id).HasColumnName("AppointmentId");
+
+            builder.Entity<Appointment>()
+                .HasKey(a => a.Id);
 
             builder.Entity<Appointment>()
                 .HasOne(a => a.Doctor)
@@ -92,7 +95,10 @@ namespace ClinicManagement.Data
                 .ToTable("Specialties");
 
             builder.Entity<Specialty>()
-               .HasKey(a => a.SpecialtyId);
+               .HasKey(s => s.Id);
+
+            builder.Entity<Specialty>()
+                .Property(s => s.Id).HasColumnName("SpecialtyId");
 
             builder.Entity<UserSpecialty>()
                 .ToTable("UserSpecialties");
@@ -118,7 +124,10 @@ namespace ClinicManagement.Data
                 .ToTable("AppointmentHours");
 
             builder.Entity<AppointmentHour>()
-                .HasKey(a => a.AppointmentHourId);
+                .HasKey(a => a.Id);
+
+            builder.Entity<Appointment>()
+                .Property(a => a.Id).HasColumnName("AppointmentHourId");
 
             builder.Entity<AppointmentHour>()
                 .HasIndex(a => a.Hour)
@@ -311,7 +320,7 @@ namespace ClinicManagement.Data
                 .HasData(
                     new Appointment
                     {
-                        AppointmentId = 1,
+                        Id = 1,
                         PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                         DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
                         AppointmentHourId = 5,
@@ -319,7 +328,7 @@ namespace ClinicManagement.Data
                     },
                     new Appointment
                     {
-                        AppointmentId = 2,
+                        Id = 2,
                         PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                         DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
                         AppointmentHourId = 2,
@@ -327,7 +336,7 @@ namespace ClinicManagement.Data
                     },
                     new Appointment
                     {
-                        AppointmentId = 3,
+                        Id = 3,
                         PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                         DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
                         AppointmentHourId = 7,
@@ -342,72 +351,72 @@ namespace ClinicManagement.Data
                 .HasData(
                     new Specialty
                     {
-                        SpecialtyId = 1,
+                        Id = 1,
                         Name = "Allergy and immunology"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 2,
+                        Id = 2,
                         Name = "Cardiology"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 3,
+                        Id = 3,
                         Name = "Dermatology"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 4,
+                        Id = 4,
                         Name = "Endocrinology"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 5,
+                        Id = 5,
                         Name = "Family medicine"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 6,
+                        Id = 6,
                         Name = "Geriatrics"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 7,
+                        Id = 7,
                         Name = "Hematology"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 8,
+                        Id = 8,
                         Name = "Neurology"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 9,
+                        Id = 9,
                         Name = "Hematology"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 10,
+                        Id = 10,
                         Name = "Pathology"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 11,
+                        Id = 11,
                         Name = "Pediatrics"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 12,
+                        Id = 12,
                         Name = "Psychiatry"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 13,
+                        Id = 13,
                         Name = "Rheumatology"
                     },
                     new Specialty
                     {
-                        SpecialtyId = 14,
+                        Id = 14,
                         Name = "Urology"
                     });
 
@@ -446,82 +455,82 @@ namespace ClinicManagement.Data
                 .HasData(
                     new AppointmentHour
                     {
-                        AppointmentHourId = 1,
+                        Id = 1,
                         Hour = "8:00"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 2,
+                        Id = 2,
                         Hour = "8:30"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 3,
+                        Id = 3,
                         Hour = "9:00"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 4,
+                        Id = 4,
                         Hour = "9:30"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 5,
+                        Id = 5,
                         Hour = "10:00"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 6,
+                        Id = 6,
                         Hour = "10:30"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 7,
+                        Id = 7,
                         Hour = "11:00"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 8,
+                        Id = 8,
                         Hour = "11:30"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 9,
+                        Id = 9,
                         Hour = "12:00"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 10,
+                        Id = 10,
                         Hour = "12:30"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 11,
+                        Id = 11,
                         Hour = "13:00"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 12,
+                        Id = 12,
                         Hour = "13:30"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 13,
+                        Id = 13,
                         Hour = "14:00"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 14,
+                        Id = 14,
                         Hour = "14:30"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 15,
+                        Id = 15,
                         Hour = "15:00"
                     },
                     new AppointmentHour
                     {
-                        AppointmentHourId = 16,
+                        Id = 16,
                         Hour = "15:30"
                     });
 

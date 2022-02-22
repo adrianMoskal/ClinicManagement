@@ -7,7 +7,7 @@ namespace ClinicManagement.Entities
 {
     public class AppointmentHour
     {
-        public int AppointmentHourId { get; set; }
+        public int Id { get; set; }
         public string Hour { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; }
     }
