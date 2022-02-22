@@ -13,14 +13,16 @@ namespace ClinicManagement.Data
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
+            Appointments = new Repository<Appointment>(_context);
+            AppointmentHours = new Repository<AppointmentHour>(_context);
+            Specialties = new Repository<Specialty>(_context);
+            UserSpecialties = new Repository<UserSpecialty>(_context);
         }
-        public IRepository<Appointment> Appointments;
 
-        public IRepository<AppointmentHour> AppointmentHours;
-
-        public IRepository<Specialty> Specialties;
-
-        public IRepository<UserSpecialty> UserSpecialties;
+        public IRepository<Appointment> Appointments { get; }
+        public IRepository<AppointmentHour> AppointmentHours { get; }
+        public IRepository<Specialty> Specialties { get; }
+        public IRepository<UserSpecialty> UserSpecialties { get; }
 
         public void Dispose()
         {

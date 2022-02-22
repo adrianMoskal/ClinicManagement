@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace ClinicManagement.Entities
 {
-    public class Specialty
+    public class Specialty : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public virtual ICollection<UserSpecialty> UserSpecialties { get; set; }
     }

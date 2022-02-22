@@ -11,10 +11,6 @@ namespace ClinicManagement.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, string, IdentityUserClaim<string>, UserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
-        public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<Specialty> Specialties { get; set; }
-        public DbSet<AppointmentHour> AppointmentHours { get; set; }
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
@@ -63,10 +59,11 @@ namespace ClinicManagement.Data
                 .ToTable("Appointments");
 
             builder.Entity<Appointment>()
-                .Property(a => a.Id).HasColumnName("AppointmentId");
+                .HasKey(a => a.Id);
 
             builder.Entity<Appointment>()
-                .HasKey(a => a.Id);
+                .Property(a => a.Id)
+                .HasColumnName("AppointmentId");
 
             builder.Entity<Appointment>()
                 .HasOne(a => a.Doctor)
@@ -98,21 +95,26 @@ namespace ClinicManagement.Data
                .HasKey(s => s.Id);
 
             builder.Entity<Specialty>()
-                .Property(s => s.Id).HasColumnName("SpecialtyId");
+                .Property(s => s.Id)
+                .HasColumnName("SpecialtyId");
 
             builder.Entity<UserSpecialty>()
                 .ToTable("UserSpecialties");
 
             builder.Entity<UserSpecialty>()
-                .HasKey(us => new { us.UserId, us.SpecialtyId });
+               .HasKey(s => s.Id);
 
             builder.Entity<UserSpecialty>()
-                .HasOne<User>(us => us.Doctor)
+               .Property(s => s.Id)
+               .HasColumnName("UserSpecialtyId");
+
+            builder.Entity<UserSpecialty>()
+                .HasOne(us => us.Doctor)
                 .WithMany(u => u.UserSpecialties)
                 .HasForeignKey(us => us.UserId);
 
             builder.Entity<UserSpecialty>()
-                .HasOne<Specialty>(us => us.Specialty)
+                .HasOne(us => us.Specialty)
                 .WithMany(s => s.UserSpecialties)
                 .HasForeignKey(us => us.SpecialtyId);
 
@@ -126,8 +128,9 @@ namespace ClinicManagement.Data
             builder.Entity<AppointmentHour>()
                 .HasKey(a => a.Id);
 
-            builder.Entity<Appointment>()
-                .Property(a => a.Id).HasColumnName("AppointmentHourId");
+            builder.Entity<AppointmentHour>()
+                .Property(a => a.Id)
+                .HasColumnName("AppointmentHourId");
 
             builder.Entity<AppointmentHour>()
                 .HasIndex(a => a.Hour)
@@ -324,7 +327,9 @@ namespace ClinicManagement.Data
                         PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                         DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
                         AppointmentHourId = 5,
-                        Date = DateTime.Now.AddDays(-5)
+                        Date = DateTime.Now.AddDays(-5),
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Appointment
                     {
@@ -332,7 +337,9 @@ namespace ClinicManagement.Data
                         PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                         DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
                         AppointmentHourId = 2,
-                        Date = DateTime.Now.AddDays(-3)
+                        Date = DateTime.Now.AddDays(-3),
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Appointment
                     {
@@ -340,7 +347,9 @@ namespace ClinicManagement.Data
                         PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                         DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
                         AppointmentHourId = 7,
-                        Date = DateTime.Now.AddDays(-1)
+                        Date = DateTime.Now.AddDays(-1),
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     });
 
             #endregion
@@ -352,72 +361,100 @@ namespace ClinicManagement.Data
                     new Specialty
                     {
                         Id = 1,
-                        Name = "Allergy and immunology"
+                        Name = "Allergy and immunology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 2,
-                        Name = "Cardiology"
+                        Name = "Cardiology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 3,
-                        Name = "Dermatology"
+                        Name = "Dermatology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 4,
-                        Name = "Endocrinology"
+                        Name = "Endocrinology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 5,
-                        Name = "Family medicine"
+                        Name = "Family medicine",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 6,
-                        Name = "Geriatrics"
+                        Name = "Geriatrics",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 7,
-                        Name = "Hematology"
+                        Name = "Hematology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 8,
-                        Name = "Neurology"
+                        Name = "Neurology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 9,
-                        Name = "Hematology"
+                        Name = "Hematology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 10,
-                        Name = "Pathology"
+                        Name = "Pathology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 11,
-                        Name = "Pediatrics"
+                        Name = "Pediatrics",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 12,
-                        Name = "Psychiatry"
+                        Name = "Psychiatry",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 13,
-                        Name = "Rheumatology"
+                        Name = "Rheumatology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new Specialty
                     {
                         Id = 14,
-                        Name = "Urology"
+                        Name = "Urology",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     });
 
             #endregion
@@ -428,23 +465,35 @@ namespace ClinicManagement.Data
                 .HasData(
                 new UserSpecialty
                 {
+                    Id = 1,
                     UserId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
-                    SpecialtyId = 5
+                    SpecialtyId = 5,
+                    CreateDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 },
                 new UserSpecialty
                 {
+                    Id = 2,
                     UserId = "40ae9fef-c94e-4823-a4da-bd1686467689",
-                    SpecialtyId = 5
+                    SpecialtyId = 5,
+                    CreateDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 },
                 new UserSpecialty
                 {
+                    Id = 3,
                     UserId = "80d10f83-f746-4397-a76f-fa2a216833bc",
-                    SpecialtyId = 2
+                    SpecialtyId = 2,
+                    CreateDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 },
                 new UserSpecialty
                 {
+                    Id = 4,
                     UserId = "80d10f83-f746-4397-a76f-fa2a216833bc",
-                    SpecialtyId = 13
+                    SpecialtyId = 13,
+                    CreateDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 });
 
             #endregion
@@ -456,82 +505,114 @@ namespace ClinicManagement.Data
                     new AppointmentHour
                     {
                         Id = 1,
-                        Hour = "8:00"
+                        Hour = "8:00",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 2,
-                        Hour = "8:30"
+                        Hour = "8:30",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 3,
-                        Hour = "9:00"
+                        Hour = "9:00",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 4,
-                        Hour = "9:30"
+                        Hour = "9:30",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 5,
-                        Hour = "10:00"
+                        Hour = "10:00",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 6,
-                        Hour = "10:30"
+                        Hour = "10:30",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 7,
-                        Hour = "11:00"
+                        Hour = "11:00",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 8,
-                        Hour = "11:30"
+                        Hour = "11:30",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 9,
-                        Hour = "12:00"
+                        Hour = "12:00",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 10,
-                        Hour = "12:30"
+                        Hour = "12:30",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 11,
-                        Hour = "13:00"
+                        Hour = "13:00",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 12,
-                        Hour = "13:30"
+                        Hour = "13:30",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 13,
-                        Hour = "14:00"
+                        Hour = "14:00",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 14,
-                        Hour = "14:30"
+                        Hour = "14:30",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 15,
-                        Hour = "15:00"
+                        Hour = "15:00",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     },
                     new AppointmentHour
                     {
                         Id = 16,
-                        Hour = "15:30"
+                        Hour = "15:30",
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now
                     });
 
             #endregion

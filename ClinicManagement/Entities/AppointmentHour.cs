@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace ClinicManagement.Entities
 {
-    public class AppointmentHour
+    public class AppointmentHour : BaseEntity
     {
-        public int Id { get; set; }
         public string Hour { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; }
     }

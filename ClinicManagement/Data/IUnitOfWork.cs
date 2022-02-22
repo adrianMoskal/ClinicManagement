@@ -13,6 +13,5 @@ namespace ClinicManagement.Data
         IRepository<AppointmentHour> AppointmentHours { get; }
         IRepository<Specialty> Specialties { get; }
         IRepository<UserSpecialty> UserSpecialties { get; }
-        IRepository<Appointment> Appointments { get; }
     }
 }

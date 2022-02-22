@@ -75,7 +75,7 @@ namespace ClinicManagement.Profiles
         public void AddAppointmentHourMapping()
         {
             CreateMap<AppointmentHour, AppointmentHourViewModel>()
-                .ForMember(dest => dest.HourId, opt => opt.MapFrom(src => src.AppointmentHourId));
+                .ForMember(dest => dest.HourId, opt => opt.MapFrom(src => src.Id));
         }
 
         #endregion
