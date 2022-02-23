@@ -54,5 +54,14 @@ namespace ClinicManagement.Helpers
             }
             _entities.Remove(entity);
         }
+
+        public void InsertRange(IEnumerable<T> entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentNullException("entities");
+            }
+            _entities.AddRange(entities);
+        }
     }
 }

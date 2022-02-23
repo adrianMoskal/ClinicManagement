@@ -14,6 +14,7 @@ namespace ClinicManagement.Helpers
         void Insert(T entity);
         void Update(T entity);
         void Delete(T entity);
+        void InsertRange(IEnumerable<T> entities);
         //IQueryable<T> FindAsync(Expression<Func<T, bool>> predicate);
     }
 }

@@ -66,6 +66,9 @@ namespace ClinicManagement
                     name: "default",
                     pattern: "{controller=Account}/{action=Login}/{id?}");
             });
+
+            //Seed database
+            ApplicationDbSeed.Seed(app);
         }
     }
 }
