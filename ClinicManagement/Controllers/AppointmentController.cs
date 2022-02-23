@@ -1,100 +1,99 @@
-﻿//using AutoMapper;
-//using ClinicManagement.Data;
-//using ClinicManagement.Entities;
-//using ClinicManagement.Models;
-//using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.Rendering;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Security.Claims;
-//using System.Threading.Tasks;
-//using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using ClinicManagement.Data;
+using ClinicManagement.Entities;
+using ClinicManagement.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-//namespace ClinicManagement.Controllers
-//{
-//    [Authorize]
-//    public class AppointmentController : Controller
-//    {
-//        private readonly IUnitOfWork _unitOfWork;
-//        private readonly IMapper _mapper;
-//        private readonly UserManager<User> _userManager;
+namespace ClinicManagement.Controllers
+{
+    [Authorize]
+    public class AppointmentController : Controller
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
 
-//        public AppointmentController(UnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper)
-//        {
-//            _unitOfWork = unitOfWork;
-//            _userManager = userManager;
-//            _mapper = mapper;
-//        }
+        public AppointmentController(IUnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _userManager = userManager;
+            _mapper = mapper;
+        }
 
-//        [HttpGet]
-//        public IActionResult Index()
-//        {
-//            var currentUser = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(User.Identity.Name));
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var currentUser = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(User.Identity.Name));
 
-//            var userAppointments = currentUser.AppointmentsDoc.Any() ? currentUser.AppointmentsDoc : currentUser.AppointmentsPat;
+            var userAppointments = currentUser.AppointmentsDoc.Any() ? currentUser.AppointmentsDoc : currentUser.AppointmentsPat;
 
-//            var appointments = _mapper.Map<IEnumerable<AppointmentViewModel>>(userAppointments);
+            var appointments = _mapper.Map<IEnumerable<AppointmentViewModel>>(userAppointments);
 
-//            return View(appointments);
-//        }
+            return View(appointments);
+        }
 
-//        [HttpGet]
-//        public IActionResult Availability()
-//        {
-//            var specialties = _unitOfWork.Specialties.GetAll();
-//            var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
+        [HttpGet]
+        public async Task<IActionResult> Availability()
+        {
+            var specialties = await _unitOfWork.Specialties.GetAll();
+            var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
 
-//            var model = new AppointmentCreateViewModel();
-//            return View(model);
-//        }
+            var model = new AppointmentCreateViewModel();
+            return View(model);
+        }
 
-//        [HttpPost]
-//        public IActionResult Availability(AppointmentCreateViewModel model)
-//        {
-//            if(model.SpecialtyId != null && model.DoctorId != null)
-//            {
-//                var doctor = _userManager.Users.Single(u => u.Id.Equals(model.DoctorId));
-//                model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
+        [HttpPost]
+        public async Task<IActionResult> Availability(AppointmentCreateViewModel model)
+        {
+            if (model.SpecialtyId != null && model.DoctorId != null)
+            {
+                var doctor = _userManager.Users.Single(u => u.Id.Equals(model.DoctorId));
+                model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
 
-//                // change
-//                var specialty = _unitOfWork.Specialties.GetAll().Single(s => s.Id.Equals(model.SpecialtyId));
-//                model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
-//            }
-//            return View(model);
-//        }
+                var specialty = await _unitOfWork.Specialties.FindOneAsync(s => s.Id == model.SpecialtyId);
+                model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
+            }
+            return View(model);
+        }
 
-//        public JsonResult AllSpecialties()
-//        {
-//            var specialties =  _unitOfWork.Specialties.GetAll().ToList();
-//            var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
-//            return Json(specialtiesVM);
-//        }
+        public async Task<JsonResult> AllSpecialties()
+        {
+            var specialties = await _unitOfWork.Specialties.GetAll();
+            var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
+            return Json(specialtiesVM);
+        }
 
-//        public async Task<JsonResult> AllDoctorsInSpecialty(int specialtyId)
-//        {
-//            var doctors = await _userManager.Users.Where(u => u.UserSpecialties.Any(us => us.SpecialtyId == specialtyId)).ToListAsync();
-//            var doctorsVM = _mapper.Map<IEnumerable<DoctorViewModel>>(doctors);
-//            return Json(doctorsVM);
-//        }
+        public async Task<JsonResult> AllDoctorsInSpecialty(int specialtyId)
+        {
+            var doctors = await _userManager.Users.Where(u => u.UserSpecialties.Any(us => us.SpecialtyId == specialtyId)).ToListAsync();
+            var doctorsVM = _mapper.Map<IEnumerable<DoctorViewModel>>(doctors);
+            return Json(doctorsVM);
+        }
 
-//        public JsonResult DoctorAvailability(string doctorId, DateTime date)
-//        {
-//            var appointmentHours = _unitOfWork.AppointmentHours.GetAll().ToList();
-//            var appointmentHoursVM = _mapper.Map<List<AppointmentHourViewModel>>(appointmentHours);
+        public async Task<JsonResult> DoctorAvailability(string doctorId, DateTime date)
+        {
+            var appointmentHours = await _unitOfWork.AppointmentHours.GetAll();
+            var appointmentHoursVM = _mapper.Map<IEnumerable<AppointmentHourViewModel>>(appointmentHours);
 
-//            // change
-//            var doctorAppointments = _unitOfWork.Appointments.GetAll().Where(a => a.DoctorId.Equals(doctorId) && a.Date.Date.CompareTo(date.Date) == 0).Select(a => a.AppointmentHourId);
+            var doctorAppointments = await _unitOfWork.Appointments.FindAsync(a => a.DoctorId.Equals(doctorId) && a.Date.Date.CompareTo(date.Date) == 0);
+            var doctorAppointmentsHoursId = doctorAppointments.Select(a => a.AppointmentHourId);
 
-//            for (int i = 0; i < appointmentHoursVM.Count(); i++)
-//            {
-//                if (!doctorAppointments.Contains(appointmentHoursVM[i].HourId))
-//                    appointmentHoursVM[i].Availability = true;
-//            }
+            for (int i = 0; i < appointmentHoursVM.Count(); i++)
+            {
+                if (!doctorAppointmentsHoursId.Contains(appointmentHoursVM.ElementAt(i).HourId))
+                    appointmentHoursVM.ElementAt(i).Availability = true;
+            }
 
-//            return Json(appointmentHoursVM);
-//        }
-//    }
-//}
+            return Json(appointmentHoursVM);
+        }
+    }
+}

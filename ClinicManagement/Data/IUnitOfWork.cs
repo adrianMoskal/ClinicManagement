@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClinicManagement.Data
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IRepository<Appointment> Appointments { get; }
         IRepository<AppointmentHour> AppointmentHours { get; }

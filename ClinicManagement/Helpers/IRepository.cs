@@ -9,12 +9,14 @@ namespace ClinicManagement.Helpers
 {
     public interface IRepository<T> where T: BaseEntity
     {
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
         Task<T> GetById(long id);
+        Task<T> FindOneAsync(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
         void Insert(T entity);
-        void Update(T entity);
-        void Delete(T entity);
         void InsertRange(IEnumerable<T> entities);
-        //IQueryable<T> FindAsync(Expression<Func<T, bool>> predicate);
+        void Remove(T entity);
+        void RemoveRange(IEnumerable<T> entities);
+        void Update(T entity); 
     }
 }

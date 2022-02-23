@@ -7,7 +7,7 @@ namespace ClinicManagement.Models
 {
     public class SpecialtyViewModel
     {
-        public int SpecialtyId { get; set; }
+        public long SpecialtyId { get; set; }
         public string Name { get; set; }
     }
 }

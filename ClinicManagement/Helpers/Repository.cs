@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ClinicManagement.Helpers
@@ -18,14 +19,24 @@ namespace ClinicManagement.Helpers
             _entities = context.Set<T>();
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
-            return _entities.AsEnumerable();
+            return await _entities.ToListAsync();
         }
 
         public async Task<T> GetById(long id)
         {
             return await _entities.SingleOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task<T> FindOneAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _entities.FirstAsync(predicate);
+        }
+
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _entities.Where(predicate).ToListAsync();
         }
 
         public void Insert(T entity)
@@ -37,16 +48,16 @@ namespace ClinicManagement.Helpers
             _entities.Add(entity);
         }
 
-        public void Update(T entity)
+        public void InsertRange(IEnumerable<T> entities)
         {
-            if (entity == null)
+            if (entities == null)
             {
-                throw new ArgumentNullException("entity");
+                throw new ArgumentNullException("entities");
             }
-            _entities.Update(entity);
+            _entities.AddRange(entities);
         }
 
-        public void Delete(T entity)
+        public void Remove(T entity)
         {
             if (entity == null)
             {
@@ -55,13 +66,22 @@ namespace ClinicManagement.Helpers
             _entities.Remove(entity);
         }
 
-        public void InsertRange(IEnumerable<T> entities)
+        public void RemoveRange(IEnumerable<T> entities)
         {
             if (entities == null)
             {
                 throw new ArgumentNullException("entities");
             }
-            _entities.AddRange(entities);
+            _entities.RemoveRange(entities);
+        }
+
+        public void Update(T entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            _entities.Update(entity);
         }
     }
 }
