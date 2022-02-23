@@ -55,39 +55,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            AppointmentHourId = 5L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(4236),
-                            Date = new DateTime(2022, 2, 17, 20, 19, 12, 442, DateTimeKind.Local).AddTicks(2750),
-                            DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(4610),
-                            PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            AppointmentHourId = 2L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(4921),
-                            Date = new DateTime(2022, 2, 19, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(4912),
-                            DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(4923),
-                            PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            AppointmentHourId = 7L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(4929),
-                            Date = new DateTime(2022, 2, 21, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(4927),
-                            DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(4931),
-                            PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4"
-                        });
+                    b.ToTable("Appointment");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.AppointmentHour", b =>
@@ -113,121 +81,7 @@ namespace ClinicManagement.Data.Migrations
                         .IsUnique()
                         .HasFilter("[Hour] IS NOT NULL");
 
-                    b.ToTable("AppointmentHours");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7550),
-                            Hour = "8:00",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7559)
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7564),
-                            Hour = "8:30",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7566)
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7568),
-                            Hour = "9:00",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7570)
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7573),
-                            Hour = "9:30",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7575)
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7577),
-                            Hour = "10:00",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7579)
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7582),
-                            Hour = "10:30",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7584)
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7587),
-                            Hour = "11:00",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7589)
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7591),
-                            Hour = "11:30",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7593)
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7596),
-                            Hour = "12:00",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7598)
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7600),
-                            Hour = "12:30",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7602)
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7605),
-                            Hour = "13:00",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7607)
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7610),
-                            Hour = "13:30",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7612)
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7614),
-                            Hour = "14:00",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7616)
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7619),
-                            Hour = "14:30",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7621)
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7623),
-                            Hour = "15:00",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7625)
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7627),
-                            Hour = "15:30",
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(7630)
-                        });
+                    b.ToTable("AppointmentHour");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.Role", b =>
@@ -257,33 +111,7 @@ namespace ClinicManagement.Data.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "12c114d1-0ad1-4e02-bb85-ec6a2bceed1b",
-                            ConcurrencyStamp = "accb09ec-6f9f-4c73-a066-f4764d88b278",
-                            Description = "All privileges",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "526fa4c0-f544-4ad0-9d31-0185533cdf48",
-                            ConcurrencyStamp = "65c225e1-5e1e-48fa-b8ab-9dd8794b9043",
-                            Description = "Person who is giving medical care",
-                            Name = "Doctor",
-                            NormalizedName = "DOCTOR"
-                        },
-                        new
-                        {
-                            Id = "d428231e-4f51-4e41-913e-056f91346c16",
-                            ConcurrencyStamp = "59b3eba1-eaac-442f-9ca1-a2b5a3a8e287",
-                            Description = "Person who is receiving medical care",
-                            Name = "Patient",
-                            NormalizedName = "PATIENT"
-                        });
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.Specialty", b =>
@@ -305,107 +133,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specialties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5785),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5794),
-                            Name = "Allergy and immunology"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5799),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5801),
-                            Name = "Cardiology"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5804),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5806),
-                            Name = "Dermatology"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5809),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5811),
-                            Name = "Endocrinology"
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5813),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5815),
-                            Name = "Family medicine"
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5818),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5820),
-                            Name = "Geriatrics"
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5822),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5824),
-                            Name = "Hematology"
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5827),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5829),
-                            Name = "Neurology"
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5831),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5834),
-                            Name = "Hematology"
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5836),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5838),
-                            Name = "Pathology"
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5841),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5843),
-                            Name = "Pediatrics"
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5845),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5847),
-                            Name = "Psychiatry"
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5850),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5852),
-                            Name = "Rheumatology"
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5854),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(5856),
-                            Name = "Urology"
-                        });
+                    b.ToTable("Specialty");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.User", b =>
@@ -476,111 +204,7 @@ namespace ClinicManagement.Data.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "f93f376e-0543-4073-aaf4-ceb2df8aac0b",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Super",
-                            LastName = "User",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "SUPERUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "111111111",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "SuperUser"
-                        },
-                        new
-                        {
-                            Id = "40ae9fef-c94e-4823-a4da-bd1686467689",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Dean",
-                            LastName = "Winchester",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "DEANWINCHESTER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "999888777",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "deanWinchester"
-                        },
-                        new
-                        {
-                            Id = "6ca24cbc-8085-475b-8bee-b3c09575561e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Sam",
-                            LastName = "Winchester",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "SAMWINCHESTER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "789456123",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "samWinchester"
-                        },
-                        new
-                        {
-                            Id = "80d10f83-f746-4397-a76f-fa2a216833bc",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Castiel",
-                            LastName = "Clarence",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "CASTIELCLARENCE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "888567000",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "castielClarence"
-                        },
-                        new
-                        {
-                            Id = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Bobby",
-                            LastName = "Singer",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "BOBBYSINGER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "555080911",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "bobbySinger"
-                        },
-                        new
-                        {
-                            Id = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Jody",
-                            LastName = "Mills",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "JODYMILLS",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "776554112",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "jodyMills"
-                        });
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.UserRole", b =>
@@ -605,39 +229,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("UserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "f93f376e-0543-4073-aaf4-ceb2df8aac0b",
-                            RoleId = "12c114d1-0ad1-4e02-bb85-ec6a2bceed1b"
-                        },
-                        new
-                        {
-                            UserId = "40ae9fef-c94e-4823-a4da-bd1686467689",
-                            RoleId = "526fa4c0-f544-4ad0-9d31-0185533cdf48"
-                        },
-                        new
-                        {
-                            UserId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
-                            RoleId = "526fa4c0-f544-4ad0-9d31-0185533cdf48"
-                        },
-                        new
-                        {
-                            UserId = "80d10f83-f746-4397-a76f-fa2a216833bc",
-                            RoleId = "526fa4c0-f544-4ad0-9d31-0185533cdf48"
-                        },
-                        new
-                        {
-                            UserId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
-                            RoleId = "d428231e-4f51-4e41-913e-056f91346c16"
-                        },
-                        new
-                        {
-                            UserId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
-                            RoleId = "d428231e-4f51-4e41-913e-056f91346c16"
-                        });
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.UserSpecialty", b =>
@@ -664,43 +256,11 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("SpecialtyId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "SpecialtyId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
-                    b.ToTable("UserSpecialties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(6867),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(6876),
-                            SpecialtyId = 5L,
-                            UserId = "6ca24cbc-8085-475b-8bee-b3c09575561e"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(6881),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(6883),
-                            SpecialtyId = 5L,
-                            UserId = "40ae9fef-c94e-4823-a4da-bd1686467689"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(6885),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(6888),
-                            SpecialtyId = 2L,
-                            UserId = "80d10f83-f746-4397-a76f-fa2a216833bc"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreateDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(6890),
-                            ModifiedDate = new DateTime(2022, 2, 22, 20, 19, 12, 444, DateTimeKind.Local).AddTicks(6892),
-                            SpecialtyId = 13L,
-                            UserId = "80d10f83-f746-4397-a76f-fa2a216833bc"
-                        });
+                    b.ToTable("UserSpecialty");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -724,7 +284,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleClaims");
+                    b.ToTable("RoleClaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -748,7 +308,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserClaims");
+                    b.ToTable("UserClaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -772,7 +332,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLogins");
+                    b.ToTable("UserLogin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -793,7 +353,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserTokens");
+                    b.ToTable("UserToken");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.Appointment", b =>

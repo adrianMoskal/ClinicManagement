@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220131143214_AddDoctorsAndPatientsDummyData")]
-    partial class AddDoctorsAndPatientsDummyData
+    [Migration("20220223081121_AddCustomIdentityTables")]
+    partial class AddCustomIdentityTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,33 +48,7 @@ namespace ClinicManagement.Data.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "12c114d1-0ad1-4e02-bb85-ec6a2bceed1b",
-                            ConcurrencyStamp = "accb09ec-6f9f-4c73-a066-f4764d88b278",
-                            Description = "All privileges",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "526fa4c0-f544-4ad0-9d31-0185533cdf48",
-                            ConcurrencyStamp = "65c225e1-5e1e-48fa-b8ab-9dd8794b9043",
-                            Description = "Person who is giving medical care",
-                            Name = "Doctor",
-                            NormalizedName = "DOCTOR"
-                        },
-                        new
-                        {
-                            Id = "d428231e-4f51-4e41-913e-056f91346c16",
-                            ConcurrencyStamp = "59b3eba1-eaac-442f-9ca1-a2b5a3a8e287",
-                            Description = "Person who is receiving medical care",
-                            Name = "Patient",
-                            NormalizedName = "PATIENT"
-                        });
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.User", b =>
@@ -145,111 +119,7 @@ namespace ClinicManagement.Data.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "f93f376e-0543-4073-aaf4-ceb2df8aac0b",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Super",
-                            LastName = "User",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "SUPERUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "111111111",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "SuperUser"
-                        },
-                        new
-                        {
-                            Id = "40ae9fef-c94e-4823-a4da-bd1686467689",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Dean",
-                            LastName = "Winchester",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "DEANWINCHESTER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "999888777",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "deanWinchester"
-                        },
-                        new
-                        {
-                            Id = "6ca24cbc-8085-475b-8bee-b3c09575561e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Sam",
-                            LastName = "Winchester",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "SAMWINCHESTER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "789456123",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "samWinchester"
-                        },
-                        new
-                        {
-                            Id = "80d10f83-f746-4397-a76f-fa2a216833bc",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Castiel",
-                            LastName = "Clarence",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "CASTIELCLARENCE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "888567000",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "castielClarence"
-                        },
-                        new
-                        {
-                            Id = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Bobby",
-                            LastName = "Singer",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "BOBBYSINGER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "555080911",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "bobbySinger"
-                        },
-                        new
-                        {
-                            Id = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
-                            EmailConfirmed = false,
-                            FirstName = "Jody",
-                            LastName = "Mills",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "JODYMILLS",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==",
-                            PhoneNumber = "776554112",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
-                            TwoFactorEnabled = false,
-                            UserName = "jodyMills"
-                        });
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.UserRole", b =>
@@ -274,39 +144,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("UserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "f93f376e-0543-4073-aaf4-ceb2df8aac0b",
-                            RoleId = "12c114d1-0ad1-4e02-bb85-ec6a2bceed1b"
-                        },
-                        new
-                        {
-                            UserId = "40ae9fef-c94e-4823-a4da-bd1686467689",
-                            RoleId = "526fa4c0-f544-4ad0-9d31-0185533cdf48"
-                        },
-                        new
-                        {
-                            UserId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
-                            RoleId = "526fa4c0-f544-4ad0-9d31-0185533cdf48"
-                        },
-                        new
-                        {
-                            UserId = "80d10f83-f746-4397-a76f-fa2a216833bc",
-                            RoleId = "526fa4c0-f544-4ad0-9d31-0185533cdf48"
-                        },
-                        new
-                        {
-                            UserId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
-                            RoleId = "d428231e-4f51-4e41-913e-056f91346c16"
-                        },
-                        new
-                        {
-                            UserId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
-                            RoleId = "d428231e-4f51-4e41-913e-056f91346c16"
-                        });
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -330,7 +168,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleClaims");
+                    b.ToTable("RoleClaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -354,7 +192,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserClaims");
+                    b.ToTable("UserClaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -378,7 +216,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLogins");
+                    b.ToTable("UserLogin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -399,7 +237,7 @@ namespace ClinicManagement.Data.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserTokens");
+                    b.ToTable("UserToken");
                 });
 
             modelBuilder.Entity("ClinicManagement.Entities.UserRole", b =>
