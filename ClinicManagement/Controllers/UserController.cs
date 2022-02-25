@@ -32,9 +32,9 @@ namespace ClinicManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Administrator,Doctor,Patient")]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
-            var currentUser = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(User.Identity.Name));
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
             var user = _mapper.Map<UserProfileViewModel>(currentUser);
 
@@ -70,9 +70,9 @@ namespace ClinicManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Manage()
+        public async Task<IActionResult> Manage()
         {
-            var usersDb = _userManager.Users;
+            var usersDb = await _userManager.Users.ToListAsync();
             var users = _mapper.Map<IEnumerable<UserViewModel>>(usersDb);
 
             return View(users);
@@ -80,9 +80,9 @@ namespace ClinicManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(string userId)
+        public async Task<IActionResult> Edit(string userId)
         {
-            var userDb = _userManager.Users.SingleOrDefault(u => u.Id.Equals(userId));
+            var userDb = await _userManager.FindByIdAsync(userId);
             var user = _mapper.Map<UserEditViewModel>(userDb);
 
             return View(user);
@@ -94,7 +94,7 @@ namespace ClinicManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userDb = _userManager.Users.SingleOrDefault(u => u.Id.Equals(userViewModel.UserId));
+                var userDb = await _userManager.FindByIdAsync(userViewModel.UserId);
                 if (userDb != null)
                 {
                     userDb.UserName = userViewModel.UserName;
@@ -125,7 +125,7 @@ namespace ClinicManagement.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(string userId)
         {
-            var user = _userManager.Users.SingleOrDefault(u => u.Id.Equals(userId));
+            var user = await _userManager.FindByIdAsync(userId);
             await _userManager.DeleteAsync(user);
 
             return RedirectToAction("Manage");

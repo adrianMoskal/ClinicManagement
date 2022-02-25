@@ -30,9 +30,9 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var currentUser = _userManager.Users.SingleOrDefault(u => u.UserName.Equals(User.Identity.Name));
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
             var userAppointments = currentUser.AppointmentsDoc.Any() ? currentUser.AppointmentsDoc : currentUser.AppointmentsPat;
 
@@ -56,7 +56,7 @@ namespace ClinicManagement.Controllers
         {
             if (model.SpecialtyId != null && model.DoctorId != null)
             {
-                var doctor = _userManager.Users.Single(u => u.Id.Equals(model.DoctorId));
+                var doctor = await _userManager.FindByIdAsync(model.DoctorId);
                 model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
 
                 var specialty = await _unitOfWork.Specialties.FindOneAsync(s => s.Id == model.SpecialtyId);
