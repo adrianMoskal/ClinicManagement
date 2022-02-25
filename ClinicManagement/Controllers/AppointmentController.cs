@@ -47,14 +47,14 @@ namespace ClinicManagement.Controllers
             var specialties = await _unitOfWork.Specialties.GetAll();
             var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
 
-            var model = new AppointmentCreateViewModel();
+            var model = new AvailabilityViewModel();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Availability(AppointmentCreateViewModel model)
+        public async Task<IActionResult> Availability(AvailabilityViewModel model)
         {
-            if (model.SpecialtyId != null && model.DoctorId != null)
+            if (ModelState.IsValid)
             {
                 var doctor = await _userManager.FindByIdAsync(model.DoctorId);
                 model.Doctor = _mapper.Map<DoctorViewModel>(doctor);

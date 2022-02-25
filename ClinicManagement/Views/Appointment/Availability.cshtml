@@ -1,4 +1,4 @@
-﻿@model ClinicManagement.Models.AppointmentCreateViewModel
+﻿@model ClinicManagement.Models.AvailabilityViewModel
 
 @{
     ViewBag.Title = "Create appointment";
@@ -12,6 +12,7 @@
                 <label for="SpecialtyId">Specialties</label>
                 <select name="SpecialtyId" id="SpecialtyId" class="form-select">
                 </select>
+                @Html.ValidationMessageFor(model => model.SpecialtyId, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
@@ -22,6 +23,7 @@
                         <option value="@Model.DoctorId">@Model.Doctor.FullName</option>
                     }
                 </select>
+                @Html.ValidationMessageFor(model => model.DoctorId, "", new { @class = "text-danger" })
             </div>
 
 
