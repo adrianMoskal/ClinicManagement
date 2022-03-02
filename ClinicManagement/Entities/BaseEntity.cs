@@ -9,6 +9,6 @@ namespace ClinicManagement.Entities
     {
         public long Id { get; set; }
         public DateTime CreateDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
     }
 }

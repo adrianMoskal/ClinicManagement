@@ -240,98 +240,98 @@ namespace ClinicManagement.Data
                                 Id = 1,
                                 Name = "Allergy and immunology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 2,
                                 Name = "Cardiology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 3,
                                 Name = "Dermatology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 4,
                                 Name = "Endocrinology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 5,
                                 Name = "Family medicine",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 6,
                                 Name = "Geriatrics",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 7,
                                 Name = "Hematology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 8,
                                 Name = "Neurology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 9,
                                 Name = "Hematology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 10,
                                 Name = "Pathology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 11,
                                 Name = "Pediatrics",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 12,
                                 Name = "Psychiatry",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 13,
                                 Name = "Rheumatology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Specialty
                             {
                                 Id = 14,
                                 Name = "Urology",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             }
                         });
                     }
@@ -358,7 +358,7 @@ namespace ClinicManagement.Data
                                 UserId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
                                 SpecialtyId = 5,
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new UserSpecialty
                             {
@@ -366,7 +366,7 @@ namespace ClinicManagement.Data
                                 UserId = "40ae9fef-c94e-4823-a4da-bd1686467689",
                                 SpecialtyId = 5,
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new UserSpecialty
                             {
@@ -374,7 +374,7 @@ namespace ClinicManagement.Data
                                 UserId = "80d10f83-f746-4397-a76f-fa2a216833bc",
                                 SpecialtyId = 2,
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new UserSpecialty
                             {
@@ -382,7 +382,7 @@ namespace ClinicManagement.Data
                                 UserId = "80d10f83-f746-4397-a76f-fa2a216833bc",
                                 SpecialtyId = 13,
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             }
                         });
                     }
@@ -408,112 +408,112 @@ namespace ClinicManagement.Data
                                 Id = 1,
                                 Hour = "8:00",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 2,
                                 Hour = "8:30",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 3,
                                 Hour = "9:00",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 4,
                                 Hour = "9:30",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 5,
                                 Hour = "10:00",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 6,
                                 Hour = "10:30",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 7,
                                 Hour = "11:00",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 8,
                                 Hour = "11:30",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 9,
                                 Hour = "12:00",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 10,
                                 Hour = "12:30",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 11,
                                 Hour = "13:00",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 12,
                                 Hour = "13:30",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 13,
                                 Hour = "14:00",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 14,
                                 Hour = "14:30",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 15,
                                 Hour = "15:00",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new AppointmentHour
                             {
                                 Id = 16,
                                 Hour = "15:30",
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             }
                         });
                     }
@@ -542,7 +542,7 @@ namespace ClinicManagement.Data
                                 AppointmentHourId = 5,
                                 Date = DateTime.Now.AddDays(-5),
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Appointment
                             {
@@ -552,7 +552,7 @@ namespace ClinicManagement.Data
                                 AppointmentHourId = 2,
                                 Date = DateTime.Now.AddDays(-3),
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             },
                             new Appointment
                             {
@@ -562,7 +562,7 @@ namespace ClinicManagement.Data
                                 AppointmentHourId = 7,
                                 Date = DateTime.Now.AddDays(-1),
                                 CreateDate = DateTime.Now,
-                                ModifiedDate = DateTime.Now
+                                ModificationDate = null
                             }
                         });
                     }

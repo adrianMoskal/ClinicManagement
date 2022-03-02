@@ -71,18 +71,20 @@ namespace ClinicManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AvailabilityPostViewModel model)
         {
-            var doctor = await _userManager.FindByIdAsync(model.DoctorId);
-            model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
-
-            var specialty = await _unitOfWork.Specialties.GetById((long)model.SpecialtyId);
-            model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
-
             if (ModelState.IsValid)
             {
+                var specialty = await _unitOfWork.Specialties.GetById((long)model.SpecialtyId);
                 var hour = await _unitOfWork.AppointmentHours.FindOneAsync(h => h.Hour.Equals(model.Hour));
-                model.AppointmentHour = _mapper.Map<AppointmentHourViewModel>(hour);
+                var doctor = await _userManager.FindByIdAsync(model.DoctorId);
+                var patient = await _userManager.GetUserAsync(HttpContext.User);
 
-                var newAppointment = _mapper.Map<Appointment>(model);
+                var newAppointment = new Appointment();
+                newAppointment.Patient = patient;
+                newAppointment.Doctor = doctor;
+                newAppointment.Date = DateTime.Parse(model.Date);
+                newAppointment.Hour = hour;
+                newAppointment.CreateDate = DateTime.Now;
+                newAppointment.ModificationDate = null;
 
                 _unitOfWork.Appointments.Insert(newAppointment);
                 _unitOfWork.SaveChanges();
