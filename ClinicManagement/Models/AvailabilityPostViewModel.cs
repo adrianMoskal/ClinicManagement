@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClinicManagement.Models
 {
-    public class AvailabilityViewModel
+    public class AvailabilityPostViewModel
     {
         [Required]
         public string DoctorId { get; set; }
@@ -19,5 +19,12 @@ namespace ClinicManagement.Models
         public long? SpecialtyId { get; set; }
 
         public SpecialtyViewModel Specialty { get; set; }
+
+        [Required]
+        public string Date { get; set; }
+
+        [Required]
+        public string Hour { get; set; }
+        public AppointmentHourViewModel AppointmentHour { get; set; }
     }
 }

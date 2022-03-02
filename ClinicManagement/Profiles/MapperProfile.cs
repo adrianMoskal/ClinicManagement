@@ -18,6 +18,7 @@ namespace ClinicManagement.Profiles
             AddAppointmentMapping();
             AddAppointmentHourMapping();
             AddSpecialtyMapping();
+            AddAvailabilityMapping();
         }
 
         #region User
@@ -54,6 +55,9 @@ namespace ClinicManagement.Profiles
                 .ForMember(dest => dest.DoctorId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
                 .ForMember(dest => dest.Specialties, opt => opt.MapFrom(src => string.Join(", ", src.UserSpecialties.Select(us => us.Specialty.Name))));
+
+            CreateMap<DoctorViewModel, User>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DoctorId));
         }
 
         #endregion
@@ -66,6 +70,11 @@ namespace ClinicManagement.Profiles
                 .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => $"{src.Doctor.FirstName} {src.Doctor.LastName}"))
                 .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => $"{src.Patient.FirstName} {src.Patient.LastName}"))
                 .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.Hour.Hour));
+
+            CreateMap<AvailabilityPostViewModel, Appointment>()
+                .ForMember(dest => dest.AppointmentHourId, opt => opt.MapFrom(src => src.AppointmentHour.HourId))
+                .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.AppointmentHour))
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.Parse(src.Date)));
         }
 
         #endregion
@@ -86,6 +95,15 @@ namespace ClinicManagement.Profiles
         {
             CreateMap<Specialty, SpecialtyViewModel>()
                 .ForMember(dest => dest.SpecialtyId, opt => opt.MapFrom(src => src.Id));
+        }
+
+        #endregion
+
+        #region Availability
+
+        public void AddAvailabilityMapping()
+        {
+            CreateMap<AvailabilityGetViewModel, AvailabilityPostViewModel>();
         }
 
         #endregion

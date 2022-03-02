@@ -47,12 +47,12 @@ namespace ClinicManagement.Controllers
             var specialties = await _unitOfWork.Specialties.GetAll();
             var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
 
-            var model = new AvailabilityViewModel();
-            return View(model);
+            var model = new AvailabilityGetViewModel();
+            return View("AvailabilityGet",model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Availability(AvailabilityViewModel model)
+        public async Task<IActionResult> Availability(AvailabilityGetViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -61,8 +61,36 @@ namespace ClinicManagement.Controllers
 
                 var specialty = await _unitOfWork.Specialties.FindOneAsync(s => s.Id == model.SpecialtyId);
                 model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
+
+                var newModel = _mapper.Map<AvailabilityPostViewModel>(model);
+                return View("AvailabilityPost", newModel);
             }
-            return View(model);
+            return View("AvailabilityPost", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(AvailabilityPostViewModel model)
+        {
+            var doctor = await _userManager.FindByIdAsync(model.DoctorId);
+            model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
+
+            var specialty = await _unitOfWork.Specialties.GetById((long)model.SpecialtyId);
+            model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
+
+            if (ModelState.IsValid)
+            {
+                var hour = await _unitOfWork.AppointmentHours.FindOneAsync(h => h.Hour.Equals(model.Hour));
+                model.AppointmentHour = _mapper.Map<AppointmentHourViewModel>(hour);
+
+                var newAppointment = _mapper.Map<Appointment>(model);
+
+                _unitOfWork.Appointments.Insert(newAppointment);
+                _unitOfWork.SaveChanges();
+
+                return View(model);
+            }
+
+            return View("AvailabilityPost", model);
         }
 
         public async Task<JsonResult> AllSpecialties()
