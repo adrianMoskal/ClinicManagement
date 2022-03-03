@@ -1,5 +1,6 @@
 ﻿$(function () {
     $("#calendar").datepicker({
+        dateFormat: "dd/mm/yy",
         onSelect: function () {
             let pickedDate = this.value;
             $("#calendar-value").val(pickedDate);

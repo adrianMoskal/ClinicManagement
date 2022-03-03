@@ -35,7 +35,7 @@
                 <div>
                     <div id="calendar"></div>
                     <div class="form-group pt-3">
-                        <b>Date:</b> @Html.TextBoxFor(model => model.Date, "", new { id = "calendar-value", @readonly = "readonly", placeholder = "Pick date" })
+                        <b>Date:</b> @Html.TextBoxFor(model => model.Date, "", new { id = "calendar-value", @readonly = "readonly", placeholder = "Pick date (dd/mm/yyyy)" })
                         @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group pt-1">
@@ -43,6 +43,9 @@
                         @Html.ValidationMessageFor(model => model.Hour, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
+                @Html.ValidationSummary()
+
                 <div class="form-group pt-1">
                     <button type="submit" class="btn btn-primary">Make an appointment</button>
                 </div>

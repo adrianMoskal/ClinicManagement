@@ -23,9 +23,17 @@ namespace ClinicManagement.Data
         public IRepository<AppointmentHour> AppointmentHours { get; }
         public IRepository<Specialty> Specialties { get; }
         public IRepository<UserSpecialty> UserSpecialties { get; }
-        public void SaveChanges()
+        public async Task<int> SaveChangesAsync()
         {
-            _context.SaveChangesAsync();
+            try
+            {
+                return await _context.SaveChangesAsync();
+            }
+            catch(Exception)
+            {
+                return -1;
+            }
+            
         }
 
         private bool disposed = false;

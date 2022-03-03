@@ -88,7 +88,11 @@ namespace ClinicManagement.Controllers
                 newAppointment.ModificationDate = null;
 
                 _unitOfWork.Appointments.Insert(newAppointment);
-                _unitOfWork.SaveChanges();
+                if(await _unitOfWork.SaveChangesAsync() < 1)
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View("AvailabilityPost", model);
+                }
 
                 return View(model);
             }

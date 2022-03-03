@@ -13,6 +13,6 @@ namespace ClinicManagement.Data
         IRepository<AppointmentHour> AppointmentHours { get; }
         IRepository<Specialty> Specialties { get; }
         IRepository<UserSpecialty> UserSpecialties { get; }
-        void SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }
