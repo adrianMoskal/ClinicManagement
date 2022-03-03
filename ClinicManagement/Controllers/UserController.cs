@@ -75,6 +75,12 @@ namespace ClinicManagement.Controllers
             var usersDb = await _userManager.Users.ToListAsync();
             var users = _mapper.Map<IEnumerable<UserViewModel>>(usersDb);
 
+            for(int i = 0; i < users.Count(); i++)
+            {
+                var roles = await _userManager.GetRolesAsync(usersDb.ElementAt(i));
+                users.ElementAt(i).Role = string.Join(", ", roles);
+            }
+
             return View(users);
         }
 
