@@ -40,6 +40,7 @@
 /* Main */
 main {
     background-color: #eee;
+    overflow: scroll;
 }
 
 @media (min-width: 992px) {
