@@ -89,6 +89,12 @@ namespace ClinicManagement.Controllers
         public async Task<IActionResult> Edit(string userId)
         {
             var userDb = await _userManager.FindByIdAsync(userId);
+
+            if (await _userManager.IsInRoleAsync(userDb, "Administrator"))
+            {
+                return RedirectToAction("Manage");
+            }
+
             var user = _mapper.Map<UserEditViewModel>(userDb);
 
             return View(user);
@@ -132,6 +138,12 @@ namespace ClinicManagement.Controllers
         public async Task<IActionResult> Delete(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
+
+            if (await _userManager.IsInRoleAsync(user, "Administrator"))
+            {
+                return RedirectToAction("Manage");
+            }
+
             await _userManager.DeleteAsync(user);
 
             return RedirectToAction("Manage");
