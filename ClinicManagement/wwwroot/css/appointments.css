@@ -1,4 +1,4 @@
-﻿/* Index */
+﻿/* GET */
 
 .main-container {
     height: 100vh;
@@ -9,6 +9,20 @@
     display: flex;
     flex-direction: column;
 }
+
+.filters-box {
+    width: 100%;
+    min-width: 1200px;
+    height: fit-content;
+    background-color: white;
+    margin-top: 10rem;
+    padding: 5rem;
+}
+
+    .filters-box > form {
+        display: flex;
+        justify-content: space-around;
+    }
 
 .options-box {
     width: 100%;
@@ -48,25 +62,22 @@
     }
 
 
-/* Create */
+/* POST */
 
-.filters-box {
+.selected-filters-box {
     width: 100%;
     min-width: 1200px;
     height: fit-content;
     background-color: white;
     margin-top: 10rem;
     padding: 5rem;
+    display: flex;
+    justify-content: space-around;
 }
 
-    .filters-box > form {
-        display: flex;
-        justify-content: space-around;
+    .form-select {
+        width: 200px;
     }
-
-.form-select {
-    width: 200px;
-}
 
 .form-group button {
     margin-top: 1.3rem;
@@ -125,4 +136,8 @@
 
 .ui-datepicker-next-hover {
     background: #0d6efd;
+}
+
+input[type=text] {
+    background-color: #eee;
 }

@@ -71,11 +71,12 @@ namespace ClinicManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AvailabilityPostViewModel model)
         {
+            var specialty = await _unitOfWork.Specialties.GetById((long)model.SpecialtyId);
+            var doctor = await _userManager.FindByIdAsync(model.DoctorId);
+
             if (ModelState.IsValid)
             {
-                var specialty = await _unitOfWork.Specialties.GetById((long)model.SpecialtyId);
                 var hour = await _unitOfWork.AppointmentHours.FindOneAsync(h => h.Hour.Equals(model.Hour));
-                var doctor = await _userManager.FindByIdAsync(model.DoctorId);
                 var patient = await _userManager.GetUserAsync(HttpContext.User);
 
                 var newAppointment = new Appointment();
@@ -91,6 +92,9 @@ namespace ClinicManagement.Controllers
 
                 return View(model);
             }
+
+            model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
+            model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
 
             return View("AvailabilityPost", model);
         }
