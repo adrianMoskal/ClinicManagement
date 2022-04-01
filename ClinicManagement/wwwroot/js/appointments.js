@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
     fillSpecialties();
     addOnChangeSpecialty();
+
+    addOnChangeDate();
 });
 
 function fillSpecialties() {
@@ -45,4 +47,25 @@ function fillDoctors(data) {
     } else {
         $("#DoctorId").attr("disabled", true);
     }
+}
+
+function addOnChangeDate() {
+    $("#date").on("change", function (e) {
+        $.ajax({
+            url: "../Appointment/HoursAvailability",
+            method: "get",
+            contentType: "application/json",
+            data: {
+                date: this.value,
+            }
+        })
+            .done(res => {
+                $('#hour').removeAttr('disabled');
+                for (let hour of res) {
+                    if (hour.available === true) {
+                        $('#hour').append('<option id="' + hour.hourId + '">' + hour.hour + '</option>');
+                    }
+                }
+            });
+    });
 }

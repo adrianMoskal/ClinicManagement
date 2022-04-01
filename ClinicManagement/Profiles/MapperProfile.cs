@@ -18,7 +18,6 @@ namespace ClinicManagement.Profiles
             AddAppointmentMapping();
             AddAppointmentHourMapping();
             AddSpecialtyMapping();
-            AddAvailabilityMapping();
         }
 
         #region User
@@ -75,7 +74,7 @@ namespace ClinicManagement.Profiles
 
         public void AddAppointmentHourMapping()
         {
-            CreateMap<AppointmentHour, AppointmentHourViewModel>()
+            CreateMap<AppointmentHour, AvailableHourViewModel>()
                 .ForMember(dest => dest.HourId, opt => opt.MapFrom(src => src.Id));
         }
 
@@ -93,10 +92,6 @@ namespace ClinicManagement.Profiles
 
         #region Availability
 
-        public void AddAvailabilityMapping()
-        {
-            CreateMap<AvailabilityGetViewModel, AvailabilityPostViewModel>();
-        }
 
         #endregion
     }

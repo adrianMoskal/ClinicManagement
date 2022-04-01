@@ -47,12 +47,12 @@ namespace ClinicManagement.Controllers
             var specialties = await _unitOfWork.Specialties.GetAll();
             var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
 
-            var model = new AvailabilityGetViewModel();
+            var model = new AvailabilityViewModel();
             return View("AvailabilityGet",model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Availability(AvailabilityGetViewModel model)
+        public async Task<IActionResult> Availability(AvailabilityViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -62,32 +62,33 @@ namespace ClinicManagement.Controllers
                 var specialty = await _unitOfWork.Specialties.FindOneAsync(s => s.Id == model.SpecialtyId);
                 model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
 
-                var newModel = _mapper.Map<AvailabilityPostViewModel>(model);
+                var newModel = _mapper.Map<AvailabilityViewModel>(model);
                 return View("AvailabilityPost", newModel);
             }
             return View("AvailabilityPost", model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(AvailabilityPostViewModel model)
+        public async Task<IActionResult> Create(AvailabilityViewModel model)
         {
             var specialty = await _unitOfWork.Specialties.GetById((long)model.SpecialtyId);
             var doctor = await _userManager.FindByIdAsync(model.DoctorId);
 
             if (ModelState.IsValid)
             {
-                var hour = await _unitOfWork.AppointmentHours.FindOneAsync(h => h.Hour.Equals(model.Hour));
+                var hour = await _unitOfWork.AppointmentHours.FindOneAsync(h => h.Id.Equals(model.HourId));
                 var patient = await _userManager.GetUserAsync(HttpContext.User);
 
                 var newAppointment = new Appointment();
                 newAppointment.Patient = patient;
                 newAppointment.Doctor = doctor;
-                newAppointment.Date = DateTime.Parse(model.Date);
+                newAppointment.Date = model.Date;
                 newAppointment.Hour = hour;
                 newAppointment.CreateDate = DateTime.Now;
                 newAppointment.ModificationDate = null;
 
                 _unitOfWork.Appointments.Insert(newAppointment);
+
                 if(await _unitOfWork.SaveChangesAsync() < 1)
                 {
                     ModelState.AddModelError("", "Something went wrong");
@@ -117,10 +118,10 @@ namespace ClinicManagement.Controllers
             return Json(doctorsVM);
         }
 
-        public async Task<JsonResult> DoctorAvailability(string doctorId, DateTime date)
+        public async Task<JsonResult> HoursAvailability(string doctorId, DateTime date)
         {
             var appointmentHours = await _unitOfWork.AppointmentHours.GetAll();
-            var appointmentHoursVM = _mapper.Map<IEnumerable<AppointmentHourViewModel>>(appointmentHours);
+            var appointmentHoursVM = _mapper.Map<IEnumerable<AvailableHourViewModel>>(appointmentHours);
 
             var doctorAppointments = await _unitOfWork.Appointments.FindAsync(a => a.DoctorId.Equals(doctorId) && a.Date.Date.CompareTo(date.Date) == 0);
             var doctorAppointmentsHoursId = doctorAppointments.Select(a => a.AppointmentHourId);
@@ -128,7 +129,7 @@ namespace ClinicManagement.Controllers
             for (int i = 0; i < appointmentHoursVM.Count(); i++)
             {
                 if (!doctorAppointmentsHoursId.Contains(appointmentHoursVM.ElementAt(i).HourId))
-                    appointmentHoursVM.ElementAt(i).Availability = true;
+                    appointmentHoursVM.ElementAt(i).Available = true;
             }
 
             return Json(appointmentHoursVM);

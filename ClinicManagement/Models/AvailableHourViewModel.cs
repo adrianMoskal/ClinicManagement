@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace ClinicManagement.Models
 {
-    public class AppointmentHourViewModel
+    public class AvailableHourViewModel
     {
         public long HourId { get; set; }
         public string Hour { get; set; }
-        public bool Availability { get; set; }
+        public bool Available { get; set; }
     }
 }

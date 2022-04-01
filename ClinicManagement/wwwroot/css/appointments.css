@@ -88,54 +88,16 @@
     min-width: 1200px;
     height: fit-content;
     background-color: white;
+    margin: auto;
     margin-top: 2rem;
     padding: 5rem;
     display: flex;
+    justify-content: space-around;
 }
 
-.left {
-    width: 30%;
-}
-
-.right {
-    width: 70%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-    .right p {
-        border: none;
-        color: white;
-        text-decoration: none;
-        text-align: center;
-        flex: 1 0 21%;
-        margin: 5px;
-        line-height: 6rem;
-        -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
-    }
-
-        .right p.not-available {
-            background-color: #9ac2fc;
-        }
-
-        .right p.available {
-            background-color: #0d6efd;
-            cursor: pointer;
-        }
-
-            .right p.available:hover {
-                background-color: #3c89fa;
-                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-            }
-
-.ui-widget-header {
-    background: #0d6efd;
-    border: none;
-}
-
-.ui-datepicker-next-hover {
-    background: #0d6efd;
+.doctor-availability form{
+    width: 100%;
+    background-color: red;
 }
 
 input[type=text] {
