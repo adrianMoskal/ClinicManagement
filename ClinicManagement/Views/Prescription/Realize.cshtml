@@ -1,0 +1,36 @@
+﻿@model ClinicManagement.Models.PrescriptionViewModel
+
+@{
+    ViewBag.Title = "Prescriptions";
+}
+
+<div class="main-container">
+    <div class="realize-box">
+        <div class="left">
+            <h2>Realization of prescription for: <span>@Model.MedicineName</span> </h2>
+
+            <h3>"@Model.Description"</h3>
+
+            <h4><b>Issuer</b>: @Model.DoctorName</h4>
+
+            <h4><b>Issue date</b>: @Model.CreateDate</h4>
+
+            <h4><b>Patient</b>: @Model.PatientName</h4>
+
+        </div>
+        <div class="right">
+            @using (Html.BeginForm("RealizePost", "Prescription", new { prescriptionId = Model.PrescriptionId }, FormMethod.Post))
+            {
+                <button type="submit" class="btn btn-primary">Mark as realized</button>
+            }
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/css/realize.css" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+    
+}

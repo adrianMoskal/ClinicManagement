@@ -51,14 +51,27 @@ namespace ClinicManagement.Controllers
         [Authorize(Roles = "Pharmacist")]
         public async Task<IActionResult> Realize(long prescriptionId)
         {
-            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var prescription = await _unitOfWork.Prescriptions.GetById(prescriptionId);
 
-            var userPrescriptions = currentUser.PrescriptionsDoc.Any() ? currentUser.PrescriptionsDoc : currentUser.PrescriptionsPat;
+            var prescriptionVM = _mapper.Map<PrescriptionViewModel>(prescription);
+            return View(prescriptionVM);
+        }
 
-            var prescriptions = _mapper.Map<IEnumerable<PrescriptionViewModel>>(userPrescriptions);
-            prescriptions = prescriptions.OrderByDescending(a => a.CreateDate);
+        [HttpPost]
+        [Authorize(Roles = "Pharmacist")]
+        public async Task<IActionResult> RealizePost(long prescriptionId)
+        {
+            var prescription = await _unitOfWork.Prescriptions.GetById(prescriptionId);
 
-            return View(prescriptions);
+            prescription.IsCollected = true;
+            prescription.CollectedDate = DateTime.Now;
+
+            if (await _unitOfWork.SaveChangesAsync() < 1)
+            {
+                ModelState.AddModelError("", "Error while saving realization");
+                return View();
+            }
+            return RedirectToAction("Index");
         }
     }
 }
