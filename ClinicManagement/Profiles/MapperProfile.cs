@@ -41,7 +41,8 @@ namespace ClinicManagement.Profiles
         public void AddPatientMapping()
         {
             CreateMap<User, PatientViewModel>()
-                .ForMember(dest => dest.PatientId, opt => opt.MapFrom(src => src.Id));
+                .ForMember(dest => dest.PatientId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
         }
 
         #endregion
@@ -66,6 +67,10 @@ namespace ClinicManagement.Profiles
                 .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => $"{src.Doctor.FirstName} {src.Doctor.LastName}"))
                 .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => $"{src.Patient.FirstName} {src.Patient.LastName}"))
                 .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.Hour.Hour));
+
+            CreateMap<AppointmentCreateViewModel, Appointment>()
+                .ForMember(dest => dest.AppointmentHourId, opt => opt.MapFrom(src => src.HourId))
+                .ForMember(dest => dest.CreateDate, opt => opt.MapFrom(src => DateTime.Now));
         }
 
         #endregion
@@ -87,11 +92,6 @@ namespace ClinicManagement.Profiles
             CreateMap<Specialty, SpecialtyViewModel>()
                 .ForMember(dest => dest.SpecialtyId, opt => opt.MapFrom(src => src.Id));
         }
-
-        #endregion
-
-        #region Availability
-
 
         #endregion
     }

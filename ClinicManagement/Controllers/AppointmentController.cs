@@ -42,66 +42,73 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Availability()
+        public async Task<IActionResult> Create()
         {
             var specialties = await _unitOfWork.Specialties.GetAll();
             var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
 
-            var model = new AvailabilityViewModel();
-            return View("AvailabilityGet",model);
+            var model = new AppointmentCreateViewModel();
+            model.Specialties = new SelectList(specialtiesVM, "SpecialtyId", "Name");
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Availability(AvailabilityViewModel model)
+        public async Task<IActionResult> Create([Bind("SpecialtyId", "DoctorId", "Date", "HourId")] AppointmentCreateViewModel model)
         {
+            var specialties = await _unitOfWork.Specialties.GetAll();
+            var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
+            model.Specialties = new SelectList(specialtiesVM, "SpecialtyId", "Name");
+
             if (ModelState.IsValid)
             {
                 var doctor = await _userManager.FindByIdAsync(model.DoctorId);
-                model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
 
-                var specialty = await _unitOfWork.Specialties.FindOneAsync(s => s.Id == model.SpecialtyId);
-                model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
+                if (doctor is null)
+                {
+                    ModelState.AddModelError("DoctorId", "Doctor 404");
+                    return View(model);
+                }
 
-                var newModel = _mapper.Map<AvailabilityViewModel>(model);
-                return View("AvailabilityPost", newModel);
-            }
-            return View("AvailabilityPost", model);
-        }
+                if (doctor.AppointmentsDoc.Any(a => a.Date == model.Date && a.AppointmentHourId == model.HourId))
+                {
+                    ModelState.AddModelError("HourId", "This hour is taken");
+                    return View(model);
+                }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(AvailabilityViewModel model)
-        {
-            var specialty = await _unitOfWork.Specialties.GetById((long)model.SpecialtyId);
-            var doctor = await _userManager.FindByIdAsync(model.DoctorId);
+                var specialty = await _unitOfWork.Specialties.GetById(model.SpecialtyId);
 
-            if (ModelState.IsValid)
-            {
-                var hour = await _unitOfWork.AppointmentHours.FindOneAsync(h => h.Id.Equals(model.HourId));
-                var patient = await _userManager.GetUserAsync(HttpContext.User);
+                if (specialty is null)
+                {
+                    ModelState.AddModelError("SpecialtyId", "Specialty 404");
+                    return View(model);
+                }
 
-                var newAppointment = new Appointment();
-                newAppointment.Patient = patient;
-                newAppointment.Doctor = doctor;
-                newAppointment.Date = model.Date;
-                newAppointment.Hour = hour;
-                newAppointment.CreateDate = DateTime.Now;
-                newAppointment.ModificationDate = null;
+                var hour = await _unitOfWork.AppointmentHours.GetById(model.HourId);
 
+                if (hour is null)
+                {
+                    ModelState.AddModelError("HourId", "Hour 404");
+                    return View(model);
+                }
+
+                var newAppointment = _mapper.Map<Appointment>(model);
+                newAppointment.Patient = await _userManager.GetUserAsync(HttpContext.User);
                 _unitOfWork.Appointments.Insert(newAppointment);
 
                 if(await _unitOfWork.SaveChangesAsync() < 1)
                 {
-                    ModelState.AddModelError("", "Something went wrong");
-                    return View("AvailabilityPost", model);
+                    ModelState.AddModelError("", "Error while creating appointment");
+                    return View(model);
                 }
 
-                return View(model);
+                model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
+                model.Patient = _mapper.Map<PatientViewModel>(newAppointment.Patient);
+                model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
+                model.Hour = _mapper.Map<AvailableHourViewModel>(hour);
+
+                return View("AppointmentCreated", model);
             }
-
-            model.Specialty = _mapper.Map<SpecialtyViewModel>(specialty);
-            model.Doctor = _mapper.Map<DoctorViewModel>(doctor);
-
-            return View("AvailabilityPost", model);
+            return View(model);
         }
 
         public async Task<JsonResult> AllSpecialties()

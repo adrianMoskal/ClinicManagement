@@ -61,10 +61,7 @@
         color: white;
     }
 
-
-/* POST */
-
-.selected-filters-box {
+.availability-box {
     width: 100%;
     min-width: 1200px;
     height: fit-content;
@@ -102,4 +99,24 @@
 
 input[type=text] {
     background-color: #eee;
+}
+
+/* Created */
+
+.confirmation-box {
+    width: 100%;
+    min-width: 1200px;
+    height: fit-content;
+    background-color: white;
+    margin-top: 10rem;
+    padding: 5rem;
+}
+
+.errors {
+    width: 100%;
+    min-width: 1200px;
+    height: fit-content;
+    background-color: white;
+    margin-top: 2rem;
+    color: red;
 }
