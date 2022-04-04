@@ -27,6 +27,7 @@ namespace ClinicManagement.Data
                     AddUserSpecialtiesDummyData();
                     AddAppointmentHoursDummyData();
                     AddAppointmentsDummyData();
+                    AddMedicinesDummyData();
 
                     transaction.Commit();
                 }
@@ -571,6 +572,73 @@ namespace ClinicManagement.Data
 
                     context.SaveChanges();
                     context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Appointment OFF;");
+                }
+
+                void AddMedicinesDummyData()
+                {
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Medicine ON;");
+
+                    #region Medicine
+
+                    if (!context.Set<Medicine>().Any())
+                    {
+                        context.Set<Medicine>().AddRange(new List<Medicine>()
+                        {
+                            new Medicine
+                            {
+                                Id = 1,
+                                Name = "Medicine 1",
+                                Price = 20.85,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Medicine
+                            {
+                                Id = 2,
+                                Name = "Medicine 2",
+                                Price = 15.22,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Medicine
+                            {
+                                Id = 3,
+                                Name = "Medicine 3",
+                                Price = 35.87,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Medicine
+                            {
+                                Id = 4,
+                                Name = "Medicine 4",
+                                Price = 88.88,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Medicine
+                            {
+                                Id = 5,
+                                Name = "Medicine 5",
+                                Price = 57.99,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Medicine
+                            {
+                                Id = 6,
+                                Name = "Medicine 6",
+                                Price = 42.20,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                        });
+                    }
+
+                    #endregion
+
+                    context.SaveChanges();
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Medicine OFF;");
                 }
             }
         }
