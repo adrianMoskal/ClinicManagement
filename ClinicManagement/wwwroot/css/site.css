@@ -32,7 +32,7 @@
 }
 
 .decoration-icon {
-    width: 15px;
+    width: 30px;
     margin-right: 10px;
 }
 
@@ -40,7 +40,7 @@
 /* Main */
 main {
     background-color: #eee;
-    overflow: scroll;
+    overflow: auto;
 }
 
 @media (min-width: 992px) {
@@ -62,7 +62,7 @@ main {
 
     .login-container::after {
         content: "";
-        background: url("../img/icons/login_background.jpg");
+        background: url("../img/images/login_background.jpg");
         background-size: cover;
         opacity: 0.4;
         top: 0;
@@ -85,7 +85,7 @@ main {
 
 .box-right {
     width: 50%;
-    background-image: url("../img/icons/login-main.jpg");
+    background-image: url("../img/images/login-main.jpg");
     background-size: cover;
     background-position: center;
     border-radius: 1rem 0 0 1rem;
@@ -220,7 +220,7 @@ main {
     .box-right {
         width: 100%;
         height: 12rem;
-        background-image: url("../img/login-main.jpg");
+        background-image: url("../img/images/login-main.jpg");
         background-size: cover;
         background-position: center;
         border-radius: 2rem 2rem 0 0;

@@ -34,25 +34,29 @@
                         @if (User.IsInRole("Patient") || User.IsInRole("Administrator"))
                         {
                             <a href="/User/Doctors" class="list-group-item list-group-item-action">
-                                <span><img src="~/img/icons/stethoscope.svg" class="decoration-icon" />Doctors</span>
+                                <span><img src="~/img/icons/doctor.png" class="decoration-icon" />Doctors</span>
                             </a>
                         }
 
                         @if (User.IsInRole("Doctor") || User.IsInRole("Administrator"))
                         {
                             <a href="/User/Patients" class="list-group-item list-group-item-action">
-                                <span><img src="~/img/icons/following.svg" class="decoration-icon" />Patients</span>
+                                <span><img src="~/img/icons/patient.png" class="decoration-icon" />Patients</span>
                             </a>
                         }
 
                         <a href="/Appointment/Index" class="list-group-item list-group-item-action">
-                            <span><img src="~/img/icons/stethoscope.svg" class="decoration-icon" />Appointments</span>
+                            <span><img src="~/img/icons/appointment.png" class="decoration-icon" />Appointments</span>
+                        </a>
+
+                        <a href="/Prescription/Index" class="list-group-item list-group-item-action">
+                            <span><img src="~/img/icons/prescription.png" class="decoration-icon" />Prescriptions</span>
                         </a>
 
                         @if (User.IsInRole("Administrator"))
                         {
                             <a href="/User/Panel" class="list-group-item list-group-item-action">
-                                <span><img src="~/img/icons/document.svg" class="decoration-icon" />Admin panel</span>
+                                <span>Admin panel</span>
                             </a>
                         }
 
