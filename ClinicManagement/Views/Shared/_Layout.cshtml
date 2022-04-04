@@ -72,7 +72,7 @@
                 </button>
 
                 <a class="navbar-brand" href="#">
-                    Logo
+                    <img src="~/img/icons/hospital.png" class="logo-icon" />Clinic
                 </a>
 
                 <!-- PROFILE -->
@@ -96,6 +96,53 @@
     {
         @RenderBody()
     }
+
+    <!-- ATTRIBUTION -->
+    <div type="button" class="attribution" data-bs-toggle="modal" data-bs-target="#attributionModal">
+        Click to see icons attribution <b>(flaticon)</b>
+    </div>
+
+    <!-- ATTRIBUTION MODAL -->
+    <div class="modal fade" id="attributionModal" tabindex="-1" role="dialog" aria-labelledby="attributionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="attributionModalLabel">Modal title</h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <img src="~/img/icons/doctor.png" class="attribution-icon" />
+                        <a href="https://www.flaticon.com/free-icon/doctor_1021566?term=doctor&related_id=1021566">Here is the icon used by me!</a>
+                        <a href="https://www.flaticon.com/free-icons/doctor" title="doctor icons">Doctor icons created by Freepik - Flaticon</a>
+                    </p>
+                    <p>
+                        <img src="~/img/icons/patient.png" class="attribution-icon" />
+                        <a href="https://www.flaticon.com/free-icon/patient_1430453?term=patient&related_id=1430453">Here is the icon used by me!</a>
+                        <a href="https://www.flaticon.com/free-icons/patient" title="patient icons">Patient icons created by Freepik - Flaticon</a>
+                    </p>
+                    <p>
+                        <img src="~/img/icons/appointment.png" class="attribution-icon" />
+                        <a href="https://www.flaticon.com/free-icon/appointment_942759?term=appointment&related_id=942759">Here is the icon used by me!</a>
+                        <a href="https://www.flaticon.com/free-icons/calendar" title="calendar icons">Calendar icons created by Freepik - Flaticon</a>
+                    </p>
+                    <p>
+                        <img src="~/img/icons/prescription.png" class="attribution-icon" />
+                        <a href="https://www.flaticon.com/free-icon/medical-prescription_1060891?term=prescription&related_id=1060891">Here is the icon used by me!</a>
+                        <a href="https://www.flaticon.com/free-icons/prescription" title="prescription icons">Prescription icons created by Freepik - Flaticon</a>
+                    </p>
+                    <p>
+                        <img src="~/img/icons/hospital.png" class="attribution-icon" />
+                        <a href="https://www.flaticon.com/free-icon/hospital_2309962?term=clinic&page=1&position=20&page=1&position=20&related_id=2309962&origin=search">Here is the icon used by me!</a>
+                        <a href="https://www.flaticon.com/free-icons/clinic" title="clinic icons">Clinic icons created by Freepik - Flaticon</a>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

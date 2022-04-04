@@ -31,11 +31,46 @@
     box-shadow: 0px 0px 4px 0px rgba(66, 68, 90, 1);
 }
 
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+}
+
 .decoration-icon {
     width: 30px;
     margin-right: 10px;
 }
 
+.logo-icon {
+    width: 50px;
+    margin-left: 3rem;
+    margin-right: 1rem;
+}
+
+.attribution-icon {
+    width: 50px;
+    margin-left: 3rem;
+    margin-right: 1rem;
+}
+
+.attribution {
+    z-index: 1000;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    cursor: pointer;
+    background-color: white;
+    font-size: 0.7rem;
+    border: 1px solid black;
+    border-radius: 2rem;
+    padding: 0.3rem;
+    box-shadow: 4px 8px 26px -7px rgba(66, 68, 90, 1);
+}
+
+.modal-body p {
+    display: flex;
+}
 
 /* Main */
 main {
