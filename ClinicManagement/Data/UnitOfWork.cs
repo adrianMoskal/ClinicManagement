@@ -17,12 +17,17 @@ namespace ClinicManagement.Data
             AppointmentHours = new Repository<AppointmentHour>(_context);
             Specialties = new Repository<Specialty>(_context);
             UserSpecialties = new Repository<UserSpecialty>(_context);
+            Medicines = new Repository<Medicine>(_context);
+            Prescriptions = new Repository<Prescription>(_context);
         }
 
         public IRepository<Appointment> Appointments { get; }
         public IRepository<AppointmentHour> AppointmentHours { get; }
         public IRepository<Specialty> Specialties { get; }
         public IRepository<UserSpecialty> UserSpecialties { get; }
+        public IRepository<Medicine> Medicines { get; }
+        public IRepository<Prescription> Prescriptions { get; }
+
         public async Task<int> SaveChangesAsync()
         {
             try

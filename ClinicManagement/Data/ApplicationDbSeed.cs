@@ -28,6 +28,7 @@ namespace ClinicManagement.Data
                     AddAppointmentHoursDummyData();
                     AddAppointmentsDummyData();
                     AddMedicinesDummyData();
+                    AddPrescriptionsDummyData();
 
                     transaction.Commit();
                 }
@@ -631,7 +632,7 @@ namespace ClinicManagement.Data
                                 Price = 42.20,
                                 CreateDate = DateTime.Now,
                                 ModificationDate = null
-                            },
+                            }
                         });
                     }
 
@@ -639,6 +640,109 @@ namespace ClinicManagement.Data
 
                     context.SaveChanges();
                     context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Medicine OFF;");
+                }
+
+                void AddPrescriptionsDummyData()
+                {
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Prescription ON;");
+
+                    #region Prescription
+
+                    if (!context.Set<Prescription>().Any())
+                    {
+                        context.Set<Prescription>().AddRange(new List<Prescription>()
+                        {
+                            new Prescription
+                            {
+                                Id = 1,
+                                Description = "Prescription for headache pills",
+                                Used = false,
+                                ExpirationDate = DateTime.Now.AddDays(4),
+                                DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
+                                PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
+                                MedicineId = 5,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Prescription
+                            {
+                                Id = 2,
+                                Description = "Prescription for stomach ache pills",
+                                Used = true,
+                                ExpirationDate = DateTime.Now.AddDays(7),
+                                DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
+                                PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
+                                MedicineId = 2,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Prescription
+                            {
+                                Id = 3,
+                                Description = "Prescription for fever pills",
+                                Used = false,
+                                ExpirationDate = DateTime.Now.AddDays(6),
+                                DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
+                                PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
+                                MedicineId = 5,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Prescription
+                            {
+                                Id = 4,
+                                Description = "Antibiotic for angina",
+                                Used = false,
+                                ExpirationDate = DateTime.Now.AddDays(7),
+                                DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
+                                PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
+                                MedicineId = 6,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Prescription
+                            {
+                                Id = 5,
+                                Description = "Aerosol for runny nose prescription",
+                                Used = true,
+                                ExpirationDate = DateTime.Now.AddDays(9),
+                                DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
+                                PatientId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
+                                MedicineId = 3,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Prescription
+                            {
+                                Id = 6,
+                                Description = "Ointment for the back pain prescription",
+                                Used = false,
+                                ExpirationDate = DateTime.Now.AddDays(2),
+                                DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
+                                PatientId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
+                                MedicineId = 4,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                            new Prescription
+                            {
+                                Id = 7,
+                                Description = "Prescription for sore throat syrup",
+                                Used = false,
+                                ExpirationDate = DateTime.Now.AddDays(7),
+                                DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
+                                PatientId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
+                                MedicineId = 1,
+                                CreateDate = DateTime.Now,
+                                ModificationDate = null
+                            },
+                        });
+                    }
+
+                    #endregion
+
+                    context.SaveChanges();
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Prescription OFF;");
                 }
             }
         }

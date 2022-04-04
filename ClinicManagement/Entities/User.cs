@@ -18,5 +18,9 @@ namespace ClinicManagement.Entities
         public virtual ICollection<Appointment> AppointmentsDoc { get; set; } // For Doctors
 
         public virtual ICollection<Appointment> AppointmentsPat { get; set; } // For Patients
+
+        public virtual ICollection<Prescription> PrescriptionsDoc { get; set; } // For Doctors
+
+        public virtual ICollection<Prescription> PrescriptionsPat { get; set; } // For Patients
     }
 }

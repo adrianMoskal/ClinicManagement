@@ -16,10 +16,10 @@ namespace ClinicManagement.Data.Configurations
                 .ToTable("Medicine");
 
             builder
-                .HasKey(a => a.Id);
+                .HasKey(m => m.Id);
 
             builder
-                .Property(a => a.Id)
+                .Property(m => m.Id)
                 .HasColumnName("MedicineId");
         }
     }

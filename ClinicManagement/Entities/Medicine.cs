@@ -9,5 +9,6 @@ namespace ClinicManagement.Entities
     {
         public string Name { get; set; }
         public double Price { get; set; }
+        public virtual IEnumerable<Prescription> Prescriptions { get; set; }
     }
 }
