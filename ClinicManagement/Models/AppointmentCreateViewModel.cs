@@ -10,19 +10,19 @@ namespace ClinicManagement.Models
 {
     public class AppointmentCreateViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Doctor is required")]
         public string DoctorId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Specialty")]
         public long SpecialtyId { get; set; }
 
         public SelectList Specialties { get; set; }
 
-        [Required]
-        public DateTime Date { get; set; }
+        [Required(ErrorMessage = "Date is required")]
+        public DateTime? Date { get; set; }
 
-        [Required]
-        public long HourId { get; set; }
+        [Required(ErrorMessage = "Hour is required")]
+        public long? HourId { get; set; }
 
         public DoctorViewModel Doctor { get; set; }
 

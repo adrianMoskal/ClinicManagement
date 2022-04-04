@@ -118,5 +118,6 @@ input[type=text] {
     height: fit-content;
     background-color: white;
     margin-top: 2rem;
+    padding: 3rem;
     color: red;
 }

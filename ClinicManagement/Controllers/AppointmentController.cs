@@ -83,7 +83,7 @@ namespace ClinicManagement.Controllers
                     return View(model);
                 }
 
-                var hour = await _unitOfWork.AppointmentHours.GetById(model.HourId);
+                var hour = await _unitOfWork.AppointmentHours.GetById((long)model.HourId);
 
                 if (hour is null)
                 {
