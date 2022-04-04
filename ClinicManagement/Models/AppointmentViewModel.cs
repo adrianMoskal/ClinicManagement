@@ -18,7 +18,11 @@ namespace ClinicManagement.Models
         [DisplayName("Patient")]
         public string PatientName { get; set; }
 
+        public string PatientUserName { get; set; }
+
         [DisplayName("Doctor")]
         public string DoctorName { get; set; }
+
+        public string DoctorUserName { get; set; }
     }
 }

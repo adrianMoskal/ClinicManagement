@@ -46,6 +46,11 @@
     width: 100%;
 }
 
+    #dataTable_wrapper img {
+        width: 50px;
+        height: 50px;
+    }
+
     #dataTable_wrapper table th {
         background-color: #0d6efd;
         color: white;

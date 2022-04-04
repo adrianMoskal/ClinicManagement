@@ -43,6 +43,7 @@
                             @Html.DisplayNameFor(model => model.Appointments.FirstOrDefault().DoctorName)
                         </th>
                     }
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -57,14 +58,19 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.PatientName)
                         </td>
+                        <td>
+                            <img src="@Url.Content("~/img/profiles/" + item.PatientUserName + ".jpg")" />
+                        </td>
                     }
                     else if (User.IsInRole("Patient"))
                     {
                         <td>
                             @Html.DisplayFor(modelItem => item.DoctorName)
                         </td>
+                        <td>
+                            <img src="@Url.Content("~/img/profiles/" + item.DoctorUserName + ".jpg")" />
+                        </td>
                     }
-
                 </tr>
                 }
             </tbody>

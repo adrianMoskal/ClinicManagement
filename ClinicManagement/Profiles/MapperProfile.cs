@@ -65,7 +65,9 @@ namespace ClinicManagement.Profiles
         {
             CreateMap<Appointment, AppointmentViewModel>()
                 .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => $"{src.Doctor.FirstName} {src.Doctor.LastName}"))
+                .ForMember(dest => dest.DoctorUserName, opt => opt.MapFrom(src => src.Doctor.UserName))
                 .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => $"{src.Patient.FirstName} {src.Patient.LastName}"))
+                .ForMember(dest => dest.PatientUserName, opt => opt.MapFrom(src => src.Patient.UserName))
                 .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.Hour.Hour));
 
             CreateMap<AppointmentCreateViewModel, Appointment>()
