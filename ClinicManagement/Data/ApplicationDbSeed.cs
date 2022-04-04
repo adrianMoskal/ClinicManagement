@@ -589,7 +589,7 @@ namespace ClinicManagement.Data
                             {
                                 Id = 1,
                                 Name = "Medicine 1",
-                                Price = 20.85,
+                                Price = 11.85,
                                 CreateDate = DateTime.Now,
                                 ModificationDate = null
                             },
@@ -597,7 +597,7 @@ namespace ClinicManagement.Data
                             {
                                 Id = 2,
                                 Name = "Medicine 2",
-                                Price = 15.22,
+                                Price = 4.22,
                                 CreateDate = DateTime.Now,
                                 ModificationDate = null
                             },
@@ -605,7 +605,7 @@ namespace ClinicManagement.Data
                             {
                                 Id = 3,
                                 Name = "Medicine 3",
-                                Price = 35.87,
+                                Price = 14.87,
                                 CreateDate = DateTime.Now,
                                 ModificationDate = null
                             },
@@ -613,7 +613,7 @@ namespace ClinicManagement.Data
                             {
                                 Id = 4,
                                 Name = "Medicine 4",
-                                Price = 88.88,
+                                Price = 5.88,
                                 CreateDate = DateTime.Now,
                                 ModificationDate = null
                             },
@@ -621,7 +621,7 @@ namespace ClinicManagement.Data
                             {
                                 Id = 5,
                                 Name = "Medicine 5",
-                                Price = 57.99,
+                                Price = 9.99,
                                 CreateDate = DateTime.Now,
                                 ModificationDate = null
                             },
@@ -629,7 +629,7 @@ namespace ClinicManagement.Data
                             {
                                 Id = 6,
                                 Name = "Medicine 6",
-                                Price = 42.20,
+                                Price = 12.20,
                                 CreateDate = DateTime.Now,
                                 ModificationDate = null
                             }
@@ -656,8 +656,9 @@ namespace ClinicManagement.Data
                             {
                                 Id = 1,
                                 Description = "Prescription for headache pills",
-                                Used = false,
+                                IsCollected = true,
                                 ExpirationDate = DateTime.Now.AddDays(4),
+                                CollectedDate = DateTime.Now.AddDays(-2),
                                 DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
                                 PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                                 MedicineId = 5,
@@ -668,8 +669,9 @@ namespace ClinicManagement.Data
                             {
                                 Id = 2,
                                 Description = "Prescription for stomach ache pills",
-                                Used = true,
+                                IsCollected = false,
                                 ExpirationDate = DateTime.Now.AddDays(7),
+                                CollectedDate = null,
                                 DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
                                 PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                                 MedicineId = 2,
@@ -680,8 +682,9 @@ namespace ClinicManagement.Data
                             {
                                 Id = 3,
                                 Description = "Prescription for fever pills",
-                                Used = false,
+                                IsCollected = false,
                                 ExpirationDate = DateTime.Now.AddDays(6),
+                                CollectedDate = null,
                                 DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
                                 PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                                 MedicineId = 5,
@@ -692,8 +695,9 @@ namespace ClinicManagement.Data
                             {
                                 Id = 4,
                                 Description = "Antibiotic for angina",
-                                Used = false,
+                                IsCollected = false,
                                 ExpirationDate = DateTime.Now.AddDays(7),
+                                CollectedDate = null,
                                 DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
                                 PatientId = "cc033eab-8a7e-4c70-8a87-1aee071141a4",
                                 MedicineId = 6,
@@ -704,8 +708,9 @@ namespace ClinicManagement.Data
                             {
                                 Id = 5,
                                 Description = "Aerosol for runny nose prescription",
-                                Used = true,
+                                IsCollected = true,
                                 ExpirationDate = DateTime.Now.AddDays(9),
+                                CollectedDate = DateTime.Now.AddDays(-1),
                                 DoctorId = "40ae9fef-c94e-4823-a4da-bd1686467689",
                                 PatientId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
                                 MedicineId = 3,
@@ -716,8 +721,9 @@ namespace ClinicManagement.Data
                             {
                                 Id = 6,
                                 Description = "Ointment for the back pain prescription",
-                                Used = false,
+                                IsCollected = false,
                                 ExpirationDate = DateTime.Now.AddDays(2),
+                                CollectedDate = null,
                                 DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
                                 PatientId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
                                 MedicineId = 4,
@@ -728,8 +734,9 @@ namespace ClinicManagement.Data
                             {
                                 Id = 7,
                                 Description = "Prescription for sore throat syrup",
-                                Used = false,
+                                IsCollected = false,
                                 ExpirationDate = DateTime.Now.AddDays(7),
+                                CollectedDate = null,
                                 DoctorId = "6ca24cbc-8085-475b-8bee-b3c09575561e",
                                 PatientId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
                                 MedicineId = 1,

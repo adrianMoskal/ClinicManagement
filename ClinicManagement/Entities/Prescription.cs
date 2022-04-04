@@ -8,8 +8,9 @@ namespace ClinicManagement.Entities
     public class Prescription : BaseEntity
     {
         public string Description { get; set; }
-        public bool Used { get; set; }
+        public bool IsCollected { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public DateTime? CollectedDate { get; set; }
         public string PatientId { get; set; }
         public virtual User Patient { get; set; }
         public string DoctorId { get; set; }

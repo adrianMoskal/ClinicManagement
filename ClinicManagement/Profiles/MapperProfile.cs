@@ -18,6 +18,7 @@ namespace ClinicManagement.Profiles
             AddAppointmentMapping();
             AddAppointmentHourMapping();
             AddSpecialtyMapping();
+            AddPrescriptionMapping();
         }
 
         #region User
@@ -93,6 +94,22 @@ namespace ClinicManagement.Profiles
         {
             CreateMap<Specialty, SpecialtyViewModel>()
                 .ForMember(dest => dest.SpecialtyId, opt => opt.MapFrom(src => src.Id));
+        }
+
+        #endregion
+
+        #region Prescriptions
+
+        public void AddPrescriptionMapping()
+        {
+            CreateMap<Prescription, PrescriptionViewModel>()
+                .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => $"{src.Doctor.FirstName} {src.Doctor.LastName}"))
+                .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => $"{src.Patient.FirstName} {src.Patient.LastName}"))
+                .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
+                .ForMember(dest => dest.MedicinePrice, opt => opt.MapFrom(src => $"{src.Medicine.Price} $"))
+                .ForMember(dest => dest.CreateDate, opt => opt.MapFrom(src => src.CreateDate.ToString()))
+                .ForMember(dest => dest.ExpirationDate, opt => opt.MapFrom(src => src.ExpirationDate.ToString()))
+                .ForMember(dest => dest.CollectedDate, opt => opt.MapFrom(src => src.CollectedDate != null ? src.CollectedDate.ToString() : ""));
         }
 
         #endregion

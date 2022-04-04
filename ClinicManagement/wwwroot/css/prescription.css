@@ -16,3 +16,13 @@
     margin-top: 10rem;
     padding: 5rem;
 }
+
+#dataTable_wrapper {
+    width: 100%;
+    min-width: 435px;
+}
+
+    #dataTable_wrapper table th {
+        background-color: #0d6efd;
+        color: white;
+    }

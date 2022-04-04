@@ -1,13 +1,98 @@
-﻿@model IEnumerable<ClinicManagement.Models.AppointmentViewModel>
+﻿@model IEnumerable<ClinicManagement.Models.PrescriptionViewModel>
 
 @{
-    ViewBag.Title = "Doctors";
+    ViewBag.Title = "Prescriptions";
 }
 
 <div class="main-container">
     <div class="prescription-box">
-
-        Prescriptions
+        @*@if (User.IsInRole("Patient"))
+            {
+                <div class="options-box">
+                    <div class="options-items">
+                        @Html.ActionLink("Make an appointment", "Create", "Appointment", null, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            }*@
+        <table class="stripe" id="dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().ExpirationDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().IsCollected)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().CollectedDate)
+                    </th>
+                    @if (User.IsInRole("Patient"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorName)
+                        </th>
+                    }
+                    else if (User.IsInRole("Doctor"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().PatientName)
+                        </th>
+                    }
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().CreateDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().MedicineName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().MedicinePrice)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExpirationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsCollected)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CollectedDate)
+                    </td>
+                    @if (User.IsInRole("Patient"))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DoctorName)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MedicineName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MedicinePrice)
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
 
     </div>
 </div>
@@ -17,5 +102,5 @@
 }
 
 @section Scripts{
-
+    <script src="~/js/datatable.js"></script>
 }
