@@ -22,6 +22,11 @@
     min-width: 435px;
 }
 
+    #dataTable_wrapper img {
+        width: 150px;
+        height: 150px;
+    }
+
     #dataTable_wrapper table th {
         background-color: #0d6efd;
         color: white;

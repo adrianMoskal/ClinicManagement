@@ -13,7 +13,7 @@
 
         <h4>Doctor: @Model.Doctor.FullName, @Model.Specialty.Name</h4>
 
-        <h4>@Model.Date : @Model.Hour.Hour</h4>
+        <h4>@Model.Date.Value.Date.ToShortDateString() : @Model.Hour.Hour</h4>
 
     </div>
 </div>

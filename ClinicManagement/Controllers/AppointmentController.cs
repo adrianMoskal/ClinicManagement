@@ -37,6 +37,7 @@ namespace ClinicManagement.Controllers
             var userAppointments = currentUser.AppointmentsDoc.Any() ? currentUser.AppointmentsDoc : currentUser.AppointmentsPat;
 
             var appointments = _mapper.Map<IEnumerable<AppointmentViewModel>>(userAppointments);
+            appointments = appointments.OrderByDescending(a => a.Date);
 
             return View(appointments);
         }

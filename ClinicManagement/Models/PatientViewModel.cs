@@ -19,6 +19,8 @@ namespace ClinicManagement.Models
         [DisplayName("Name")]
         public string FullName { get; set; }
 
+        public string UserName { get; set; }
+
         [DisplayName("Phone number")]
         public string PhoneNumber { get; set; }
     }
