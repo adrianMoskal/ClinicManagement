@@ -8,6 +8,7 @@ namespace ClinicManagement.Models
 {
     public class PrescriptionViewModel
     {
+        public long PrescriptionId { get; set; }
         public string Description { get; set; }
 
         [DisplayName("Collected")]

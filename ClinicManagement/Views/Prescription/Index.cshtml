@@ -50,6 +50,12 @@
                     <th>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().MedicinePrice)
                     </th>
+                    @if (User.IsInRole("Pharmacist"))
+                    {
+                        <th>
+                            Realize
+                        </th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -89,6 +95,16 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.MedicinePrice)
                     </td>
+                    @if (User.IsInRole("Pharmacist") && !item.IsCollected)
+                    {
+                        <td>
+                            @Html.ActionLink("Realize", "Realize", "Prescription", new { prescriptionId = item.PrescriptionId })
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
                 </tr>
                 }
             </tbody>

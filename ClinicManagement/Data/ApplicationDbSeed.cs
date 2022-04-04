@@ -142,6 +142,23 @@ namespace ClinicManagement.Data
                                 TwoFactorEnabled = false,
                                 LockoutEnabled = false,
                                 AccessFailedCount = 0
+                            },
+                            new User
+                            {
+                                Id = "66e3848b-4df8-4b19-85a5-5a25ff052e82",
+                                FirstName = "Garth",
+                                LastName = "Fitzgerald",
+                                UserName = "garthFitzgerald",
+                                NormalizedUserName = "GARTHFITZGERALD",
+                                EmailConfirmed = false,
+                                PasswordHash = "AQAAAAEAACcQAAAAEFHDs9VsKcDafKl4e7SJYYQpwX/kBoa0wrLRtG9i1aEY92YaINBYp/vN2kwORdKA5w==", // Password = Admin1@
+                                SecurityStamp = "JTERJVFIKFMJUFEDTFJFHEAJHLKXMBQD",
+                                ConcurrencyStamp = "003c3d02-b420-44f2-960c-02df61764c7a",
+                                PhoneNumber = "121454678",
+                                PhoneNumberConfirmed = false,
+                                TwoFactorEnabled = false,
+                                LockoutEnabled = false,
+                                AccessFailedCount = 0
                             }
                         });
                     }
@@ -177,6 +194,14 @@ namespace ClinicManagement.Data
                                 Name = "Patient",
                                 NormalizedName = "PATIENT",
                                 ConcurrencyStamp = "59b3eba1-eaac-442f-9ca1-a2b5a3a8e287"
+                            },
+                            new Role
+                            {
+                                Id = "9da0b3a8-c0ba-443a-a685-a548564620df",
+                                Description = "Person who prepare and dispense medicines",
+                                Name = "Pharmacist",
+                                NormalizedName = "PHARMACIST",
+                                ConcurrencyStamp = "2e5bcfa5-bce6-409a-b045-2ebe47106e29"
                             }
                         });
                     }
@@ -218,6 +243,11 @@ namespace ClinicManagement.Data
                             {
                                 UserId = "0e8f52a7-172d-41ed-bfcc-6214feec8461",
                                 RoleId = "d428231e-4f51-4e41-913e-056f91346c16"
+                            },
+                            new UserRole
+                            {
+                                UserId = "66e3848b-4df8-4b19-85a5-5a25ff052e82",
+                                RoleId = "9da0b3a8-c0ba-443a-a685-a548564620df"
                             }
                         });
                     }
