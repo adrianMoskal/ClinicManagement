@@ -5,6 +5,7 @@ using ClinicManagement.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,6 +72,42 @@ namespace ClinicManagement.Controllers
                 ModelState.AddModelError("", "Error while saving realization");
                 return View();
             }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> Create()
+        {
+            var model = new PrescriptionCreateViewModel();
+
+            var patients = await _userManager.GetUsersInRoleAsync("Patient");
+            model.Patients = new SelectList(_mapper.Map<IEnumerable<PatientViewModel>>(patients), "PatientId", "FullName");
+
+            var medicines = await _unitOfWork.Medicines.GetAll();
+            model.Medicines = new SelectList(_mapper.Map<IEnumerable<MedicineViewModel>>(medicines), "MedicineId", "Name");
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> CreatePost(PrescriptionCreateViewModel model)
+        {
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            var prescription = _mapper.Map<Prescription>(model);
+
+            prescription.DoctorId = currentUser.Id;
+
+            _unitOfWork.Prescriptions.Insert(prescription);
+
+            if (await _unitOfWork.SaveChangesAsync() < 1)
+            {
+                ModelState.AddModelError("", "Error while creating prescription");
+                return View(model);
+            }
+
             return RedirectToAction("Index");
         }
     }

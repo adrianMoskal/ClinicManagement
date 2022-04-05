@@ -6,14 +6,14 @@
 
 <div class="main-container">
     <div class="prescription-box">
-        @*@if (User.IsInRole("Patient"))
-            {
-                <div class="options-box">
-                    <div class="options-items">
-                        @Html.ActionLink("Make an appointment", "Create", "Appointment", null, new { @class = "btn btn-primary" })
-                    </div>
+        @if (User.IsInRole("Doctor"))
+        {
+            <div class="options-box">
+                <div class="options-items">
+                    @Html.ActionLink("Write a prescription", "Create", "Prescription", null, new { @class = "btn btn-primary" })
                 </div>
-            }*@
+            </div>
+        }
         <table class="stripe" id="dataTable">
             <thead>
                 <tr>

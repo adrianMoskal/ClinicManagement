@@ -1,0 +1,48 @@
+﻿@model ClinicManagement.Models.PrescriptionCreateViewModel
+
+<div class="main-container">
+    <div class="write-prescription-box">
+        @using (Html.BeginForm("CreatePost", "Prescription", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description)
+                @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mt-3">
+                @Html.LabelFor(m => m.PatientId)
+                @Html.DropDownListFor(m => m.PatientId, Model.Patients, "Patient", new { @class = "form-control chosen-select" })
+                @Html.ValidationMessageFor(m => m.PatientId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mt-3">
+                @Html.LabelFor(m => m.MedicineId)
+                @Html.DropDownListFor(m => m.MedicineId, Model.Medicines, "Medicine", new { @class = "form-control chosen-select" })
+                @Html.ValidationMessageFor(m => m.MedicineId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group text-center pt-4">
+                <button type="submit" class="btn btn-primary col-3">Write</button>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-outline text-center text-danger">
+                        @Html.ValidationSummary()
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Styles {
+    <link href="@Url.Content("~/css/prescription.css")" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.css" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+    <script src="~/js/chosen.js"></script>
+}
