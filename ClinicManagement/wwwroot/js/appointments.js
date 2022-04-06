@@ -26,6 +26,10 @@ function addOnChangeSpecialty() {
 }
 
 function fillDoctors(data) {
+    $("#DoctorId option").each(function () {
+        $(this).remove();
+    });
+
     if (data.length > 0) {
         $("#DoctorId").append($("<option></option>").attr("value", "").text("Doctor"));
         for (let el of data) {
@@ -33,9 +37,6 @@ function fillDoctors(data) {
         }
         $("#DoctorId").removeAttr("disabled");
     } else {
-        $("#DoctorId option").each(function () {
-            $(this).remove();
-        });
         $("#DoctorId").attr("disabled", true);
     }
 }
