@@ -33,7 +33,8 @@ namespace ClinicManagement.Controllers
         {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
-            var userAppointments = currentUser.AppointmentsDoc.Any() ? currentUser.AppointmentsDoc : currentUser.AppointmentsPat;
+            var userAppointments = await _userManager.IsInRoleAsync(currentUser, "Doctor") ? 
+                currentUser.AppointmentsDoc : currentUser.AppointmentsPat;
 
             var appointments = _mapper.Map<IEnumerable<AppointmentViewModel>>(userAppointments);
             appointments = appointments.OrderByDescending(a => a.Date);
@@ -49,6 +50,7 @@ namespace ClinicManagement.Controllers
 
             var model = new AppointmentCreateViewModel();
             model.Specialties = new SelectList(specialtiesVM, "SpecialtyId", "Name");
+
             return View(model);
         }
 
@@ -57,6 +59,7 @@ namespace ClinicManagement.Controllers
         {
             var specialties = await _unitOfWork.Specialties.GetAll();
             var specialtiesVM = _mapper.Map<IEnumerable<SpecialtyViewModel>>(specialties);
+
             model.Specialties = new SelectList(specialtiesVM, "SpecialtyId", "Name");
 
             if (ModelState.IsValid)

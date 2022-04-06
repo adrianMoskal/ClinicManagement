@@ -37,9 +37,13 @@ namespace ClinicManagement.Controllers
             {
                 userPrescriptions = await _unitOfWork.Prescriptions.GetAll();
             }
-            else
+            else if (await _userManager.IsInRoleAsync(currentUser, "Doctor"))
             {
-                userPrescriptions = currentUser.PrescriptionsDoc.Any() ? currentUser.PrescriptionsDoc : currentUser.PrescriptionsPat;
+                userPrescriptions = currentUser.PrescriptionsDoc;
+            }
+            else if (await _userManager.IsInRoleAsync(currentUser, "Patient"))
+            {
+                userPrescriptions = currentUser.PrescriptionsPat;
             }
 
             var prescriptions = _mapper.Map<IEnumerable<PrescriptionViewModel>>(userPrescriptions);
@@ -53,8 +57,8 @@ namespace ClinicManagement.Controllers
         public async Task<IActionResult> Realize(long prescriptionId)
         {
             var prescription = await _unitOfWork.Prescriptions.GetById(prescriptionId);
-
             var prescriptionVM = _mapper.Map<PrescriptionViewModel>(prescription);
+
             return View(prescriptionVM);
         }
 
@@ -67,11 +71,14 @@ namespace ClinicManagement.Controllers
             prescription.IsCollected = true;
             prescription.CollectedDate = DateTime.Now;
 
+            _unitOfWork.Prescriptions.Update(prescription);
+
             if (await _unitOfWork.SaveChangesAsync() < 1)
             {
                 ModelState.AddModelError("", "Error while saving realization");
                 return View();
             }
+
             return RedirectToAction("Index");
         }
 

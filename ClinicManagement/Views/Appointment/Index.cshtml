@@ -23,12 +23,18 @@
                     <th>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().Hour)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().PatientName)
-                    </th>
+                    @if (User.IsInRole("Doctor"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().PatientName)
+                        </th>
+                    }
+                    else if (User.IsInRole("Patient"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorName)
+                        </th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -41,12 +47,18 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Hour)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DoctorName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PatientName)
-                    </td>
+                    @if (User.IsInRole("Doctor"))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientName)
+                        </td>
+                    }
+                    else if(User.IsInRole("Patient"))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DoctorName)
+                        </td>
+                    } 
                 </tr>
                 }
             </tbody>

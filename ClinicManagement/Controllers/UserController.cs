@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
-using ClinicManagement.Data;
 using ClinicManagement.Entities;
 using ClinicManagement.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -89,11 +87,6 @@ namespace ClinicManagement.Controllers
         public async Task<IActionResult> Edit(string userId)
         {
             var userDb = await _userManager.FindByIdAsync(userId);
-
-            if (await _userManager.IsInRoleAsync(userDb, "Administrator"))
-            {
-                return RedirectToAction("Manage");
-            }
 
             var user = _mapper.Map<UserEditViewModel>(userDb);
 
