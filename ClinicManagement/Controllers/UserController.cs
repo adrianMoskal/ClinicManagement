@@ -2,10 +2,12 @@
 using ClinicManagement.Entities;
 using ClinicManagement.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,11 +18,13 @@ namespace ClinicManagement.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
+        private readonly IHostingEnvironment _hostEnvironment;
 
-        public UserController(UserManager<User> userManager, IMapper mapper)
+        public UserController(UserManager<User> userManager, IMapper mapper, IHostingEnvironment hostEnvironment)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Index()
@@ -55,6 +59,16 @@ namespace ClinicManagement.Controllers
         {
             var users = await _userManager.GetUsersInRoleAsync("Patient");
             var patients = _mapper.Map<IEnumerable<PatientViewModel>>(users);
+
+            _hostEnvironment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+            foreach (var patient in patients)
+            {
+                string path = string.Format("{0}/img/profiles/{1}.jpg", _hostEnvironment.WebRootPath, patient.UserName);
+
+                patient.PhotoUploaded = System.IO.File.Exists(path) ? true : false;
+            }
+
 
             return View(patients);
         }

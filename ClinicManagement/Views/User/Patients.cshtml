@@ -26,7 +26,14 @@
                 {
                     <tr>
                         <td>
-                            <img src="@Url.Content("~/img/profiles/" + item.UserName + ".jpg")" />
+                            @if (item.PhotoUploaded)
+                            {
+                                <img src="@Url.Content("~/img/profiles/" + item.UserName + ".jpg")" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/img/icons/patient.png")" />
+                            }
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.FirstName)

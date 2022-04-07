@@ -23,5 +23,7 @@ namespace ClinicManagement.Models
 
         [DisplayName("Phone number")]
         public string PhoneNumber { get; set; }
+
+        public bool PhotoUploaded { get; set; }
     }
 }
