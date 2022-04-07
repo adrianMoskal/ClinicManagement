@@ -5,7 +5,10 @@
             @User.Identity.Name <div class="rounded-circle profile-circle" style="background-image: url('@Url.Content("~/img/profiles/"+User.Identity.Name+".jpg")')"></div>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="/User/Profile">Profile info</a></li>
+            @if (!User.IsInRole("Pharmacist"))
+            {
+                <li><a class="dropdown-item" href="/User/Profile">Profile info</a></li>
+            }
             <li><a class="dropdown-item" href="/Account/Logout">Logout</a></li>
         </ul>
     </li>

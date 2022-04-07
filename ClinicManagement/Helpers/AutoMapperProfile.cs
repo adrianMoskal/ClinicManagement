@@ -10,6 +10,7 @@ namespace ClinicManagement.Helpers
     {
         public AutoMapperProfile()
         {
+            AddAccountMapping();
             AddUserMapping();
             AddPatientMapping();
             AddDoctorMapping();
@@ -19,6 +20,15 @@ namespace ClinicManagement.Helpers
             AddPrescriptionMapping();
             AddMedicineMapping();
         }
+
+        #region Account
+
+        public void AddAccountMapping()
+        {
+            CreateMap<UserRegisterViewModel, User>();
+        }
+
+        #endregion
 
         #region User
 

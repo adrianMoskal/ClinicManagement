@@ -1,8 +1,10 @@
-﻿using ClinicManagement.Entities;
+﻿using AutoMapper;
+using ClinicManagement.Entities;
 using ClinicManagement.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace ClinicManagement.Controllers
@@ -12,10 +14,12 @@ namespace ClinicManagement.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IMapper _mapper;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -31,7 +35,12 @@ namespace ClinicManagement.Controllers
             if (User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Home");
 
-            return View();
+            var model = new UserLoginViewModel();
+
+            if (TempData.ContainsKey("RegisterSuccess"))
+                model.RegisterSuccess = Convert.ToBoolean(TempData["RegisterSuccess"]);
+
+            return View(model);
         }
 
         [HttpPost]
@@ -49,6 +58,44 @@ namespace ClinicManagement.Controllers
 
             }
             return View(user);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(UserRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var newUser = _mapper.Map<User>(model);
+
+                var result = await _userManager.CreateAsync(newUser, model.Password);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                        ModelState.AddModelError(string.Empty, error.Description);
+
+                    return View(model);
+                }
+
+                await _userManager.AddToRoleAsync(newUser, "Patient");
+
+                TempData["registerSuccess"] = true;
+
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(model);
         }
 
         [HttpGet]

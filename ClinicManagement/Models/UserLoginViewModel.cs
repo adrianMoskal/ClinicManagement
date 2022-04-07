@@ -14,7 +14,10 @@ namespace ClinicManagement.Models
         public string UserName { get; set; }
 
         [Required]
+        [DisplayName("Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public bool RegisterSuccess { get; set; }
     }
 }

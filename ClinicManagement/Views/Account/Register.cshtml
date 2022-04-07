@@ -1,4 +1,4 @@
-﻿@model ClinicManagement.Models.UserLoginViewModel
+﻿@model ClinicManagement.Models.UserRegisterViewModel
 
 <div class="login-container">
     <div class="login-box-container">
@@ -9,14 +9,26 @@
                 <h2>Welcome in clinic!</h2>
                 <h4>Please login to your account</h4>
             </div>
-            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post))
             {
-                if (Model.RegisterSuccess)
-                {
-                    <div class="form-input-container">
-                        <span class="text-success">You have been successfully registered!</span>
-                    </div>
-                }
+                <div class="form-input-container">
+                    @Html.LabelFor(m => m.FirstName)
+                    @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "text-center" } })<br />
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-input-container">
+                    @Html.LabelFor(m => m.LastName)
+                    @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "text-center" } })<br />
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-input-container">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "text-center" } })<br />
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+
                 <div class="form-input-container">
                     @Html.LabelFor(m => m.UserName)
                     @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "text-center" } })<br />
@@ -29,12 +41,9 @@
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
 
-                <div class="form-input-container">
-                    @Html.ActionLink("Or create account", "Register", "Account")
-                </div>
 
                 <div class="form-input-container">
-                    <button type="submit" class="btn btn-primary col-3">Login</button>
+                    <button type="submit" class="btn btn-primary col-3">Register</button>
                 </div>
 
                 <div class="form-outline text-center text-danger">
