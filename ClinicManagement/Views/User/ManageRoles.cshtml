@@ -1,0 +1,96 @@
+﻿@model ClinicManagement.Models.UserEditRoleViewModel
+
+@{
+    ViewBag.Title = "Manage roles";
+}
+
+<div class="main-container">
+    <div class="table-box">
+        @if (TempData.ContainsKey("roleChanged"))
+        {
+            <p class="success-change">
+                <span class="text-success">Role has been successfully changed!</span>
+            </p>
+        }
+        <table class="stripe" id="dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users.FirstOrDefault().FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users.FirstOrDefault().LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users.FirstOrDefault().Role)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users.FirstOrDefault().PhoneNumber)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Users)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@item.UserName">
+                            Edit role
+                        </a>
+                    </td>
+                </tr>
+
+                    <!-- MODALS -->
+                    <div class="modal fade" id="@item.UserName" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                @using (Html.BeginForm("ManageRoles", "User", new { userId = item.UserId, roleId = Model.RoleId }, FormMethod.Post))
+                                {
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Managing @item.FirstName @item.LastName role!</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        @Html.DropDownListFor(model => model.RoleId, Model.Roles, new { @class = "form-select" })
+                                        @Html.ValidationMessageFor(model => model.RoleId)
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </tbody>
+            <p class="text-danger">
+                @Html.ValidationSummary()
+            </p>
+        </table>
+    </div>
+</div>
+
+@section Styles {
+    <link href="@Url.Content("~/css/manage.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+    <script src="~/js/datatable.js"></script>
+}

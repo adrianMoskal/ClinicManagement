@@ -12,6 +12,7 @@ namespace ClinicManagement.Helpers
         {
             AddAccountMapping();
             AddUserMapping();
+            AddRoleMapping();
             AddPatientMapping();
             AddDoctorMapping();
             AddAppointmentMapping();
@@ -35,13 +36,24 @@ namespace ClinicManagement.Helpers
         public void AddUserMapping()
         {
             CreateMap<User, UserViewModel>()
-                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id));
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.UserRoles.Any() ? src.UserRoles.First().Role.Name : ""));
 
             CreateMap<User, UserEditViewModel>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id));
 
             CreateMap<User, UserProfileViewModel>()
                 .ForMember(dest => dest.Appointments, opt => opt.MapFrom(src => src.AppointmentsDoc.Any() ? src.AppointmentsDoc : src.AppointmentsPat));
+        }
+
+        #endregion
+
+        #region Role
+
+        public void AddRoleMapping()
+        {
+            CreateMap<Role, RoleViewModel>()
+                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.Id));
         }
 
         #endregion

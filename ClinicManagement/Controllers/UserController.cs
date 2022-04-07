@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,12 +19,14 @@ namespace ClinicManagement.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly IMapper _mapper;
         private readonly IHostingEnvironment _hostEnvironment;
 
-        public UserController(UserManager<User> userManager, IMapper mapper, IHostingEnvironment hostEnvironment)
+        public UserController(UserManager<User> userManager, RoleManager<Role> roleManager, IMapper mapper, IHostingEnvironment hostEnvironment)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _mapper = mapper;
             _hostEnvironment = hostEnvironment;
         }
@@ -87,12 +91,6 @@ namespace ClinicManagement.Controllers
             var usersDb = await _userManager.Users.ToListAsync();
             var users = _mapper.Map<IEnumerable<UserViewModel>>(usersDb);
 
-            for(int i = 0; i < users.Count(); i++)
-            {
-                var roles = await _userManager.GetRolesAsync(usersDb.ElementAt(i));
-                users.ElementAt(i).Role = string.Join(", ", roles);
-            }
-
             return View(users);
         }
 
@@ -154,6 +152,88 @@ namespace ClinicManagement.Controllers
             await _userManager.DeleteAsync(user);
 
             return RedirectToAction("Manage");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> ManageRoles()
+        {
+            var usersDb = await _userManager.Users.ToListAsync();
+
+            var model = new UserEditRoleViewModel();
+            model.Users = _mapper.Map<IEnumerable<UserViewModel>>(usersDb);
+
+            var roles = await _roleManager.Roles.ToListAsync();
+            var rolesVM = _mapper.Map<IEnumerable<RoleViewModel>>(roles);
+
+            model.Roles = new SelectList(rolesVM, "RoleId", "Name");
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> ManageRoles(string userId, string roleId)
+        {
+            var usersDb = await _userManager.Users.ToListAsync();
+
+            var x = await _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToListAsync();
+
+            var model = new UserEditRoleViewModel();
+            model.Users = _mapper.Map<IEnumerable<UserViewModel>>(usersDb);
+
+            var roles = await _roleManager.Roles.ToListAsync();
+            var rolesVM = _mapper.Map<IEnumerable<RoleViewModel>>(roles);
+
+            model.Roles = new SelectList(rolesVM, "RoleId", "Name");
+
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                
+                if (user is null)
+                {
+                    ModelState.AddModelError(string.Empty, "User not found");
+                    return View(model);
+                }
+
+                var role = await _roleManager.FindByIdAsync(roleId);
+
+                if (role is null)
+                {
+                    ModelState.AddModelError(string.Empty, "Role not found");
+                    return View(model);
+                }
+
+                var userRoles = await _userManager.GetRolesAsync(user);
+                var result = await _userManager.RemoveFromRolesAsync(user, userRoles.ToArray());
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
+                    return View(model);
+                }
+
+                result = await _userManager.AddToRoleAsync(user, role.Name);
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
+                    return View(model);
+                }
+
+                var userVM = _mapper.Map<UserViewModel>(user);
+                model.Users = model.Users.Select(u => u.UserId.Equals(user.Id) ? userVM : u);
+
+                TempData["roleChanged"] = true;
+            }
+
+            return View(model);
         }
     }
 }

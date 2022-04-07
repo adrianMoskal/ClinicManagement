@@ -37,6 +37,18 @@ namespace ClinicManagement.Data
                 .ToTable("UserRole")
                 .HasKey(ur => new { ur.UserId, ur.RoleId });
 
+            builder.Entity<UserRole>()
+                .HasOne(ur => ur.Role)
+                .WithMany(r => r.UserRoles)
+                .HasForeignKey(ur => ur.RoleId)
+                .IsRequired();
+
+            builder.Entity<UserRole>()
+                .HasOne(ur => ur.User)
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(ur => ur.UserId)
+                .IsRequired();
+
             builder.Entity<IdentityUserClaim<string>>()
                 .ToTable("UserClaim");
 

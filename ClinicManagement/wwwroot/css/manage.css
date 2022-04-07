@@ -17,6 +17,10 @@
     padding: 5rem;
 }
 
+    .table-box .success-change {
+        text-align: center;
+    }
+
 #dataTable_wrapper {
     width: 100%;
     min-width: 435px;
