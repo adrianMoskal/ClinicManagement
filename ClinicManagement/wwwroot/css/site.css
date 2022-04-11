@@ -90,7 +90,7 @@ main {
 .login-container {
     height: 100vh;
     display: flex;
-    padding-top: 5rem;
+    padding-top: 4rem;
     justify-content: center;
     align-items: center;
 }
