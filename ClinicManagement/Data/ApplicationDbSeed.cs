@@ -168,7 +168,7 @@ namespace ClinicManagement.Data
                     {
                         context.Roles.AddRange(new List<Role>()
                         {
-                                new Role
+                            new Role
                             {
                                 Id = "12c114d1-0ad1-4e02-bb85-ec6a2bceed1b",
                                 Description = "All privileges",
@@ -199,6 +199,14 @@ namespace ClinicManagement.Data
                                 Name = "Pharmacist",
                                 NormalizedName = "PHARMACIST",
                                 ConcurrencyStamp = "2e5bcfa5-bce6-409a-b045-2ebe47106e29"
+                            },
+                            new Role
+                            {
+                                Id = "a16e0545-1976-4410-bf1c-26f1dba16996",
+                                Description = "Person responsible for welcoming patients",
+                                Name = "Receptionist",
+                                NormalizedName = "RECEPTIONIST",
+                                ConcurrencyStamp = "dfed40d4-6508-45f7-bbbc-b009667a080d"
                             }
                         });
                     }
