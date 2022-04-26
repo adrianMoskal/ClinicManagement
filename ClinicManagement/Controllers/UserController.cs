@@ -61,12 +61,14 @@ namespace ClinicManagement.Controllers
         [Authorize(Roles = "Administrator,Doctor")]
         public async Task<IActionResult> Patients()
         {
-            var users = await _userManager.GetUsersInRoleAsync("Patient");
-            var patients = _mapper.Map<IEnumerable<PatientViewModel>>(users);
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            var patients = currentUser.AppointmentsDoc.Select(a => a.Patient).Distinct();
+            var patientsVM = _mapper.Map<IEnumerable<PatientViewModel>>(patients);
 
             _hostEnvironment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
-            foreach (var patient in patients)
+            foreach (var patient in patientsVM)
             {
                 string path = string.Format("{0}/img/profiles/{1}.jpg", _hostEnvironment.WebRootPath, patient.UserName);
 
@@ -74,7 +76,7 @@ namespace ClinicManagement.Controllers
             }
 
 
-            return View(patients);
+            return View(patientsVM);
         }
 
         [HttpGet]
